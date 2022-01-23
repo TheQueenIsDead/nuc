@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-ansible-playbook -i inventory -l all playbook.yml
+# Guard against being called from scripts in different locations by always referencing the file
+# relative to the path of this script.
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+ansible-playbook -i "${SCRIPT_DIR}/inventory" -l all "${SCRIPT_DIR}/playbook.yml" "${@}"
