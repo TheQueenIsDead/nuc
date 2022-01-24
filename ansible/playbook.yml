@@ -1,4 +1,6 @@
-- hosts: rpi
+- name: "Home Infrastructure Setup"
+
+  hosts: rpi
 
   vars:
     pip_package: python3-pip
@@ -6,3 +8,27 @@
   roles:
     - geerlingguy.pip
     - geerlingguy.docker_arm
+
+  tasks:
+    - name: "Create compose directory"
+      file:
+        path: /compose
+        state: directory
+
+    - name: "Copy docker-compose.yml to server"
+      ansible.builtin.copy:
+        src: ../compose/docker-compose.yml
+        dest: /compose/docker-compose.yml
+        owner: ubuntu
+        group: ubuntu
+
+    - name: "Copy homer.yml to server"
+      ansible.builtin.copy:
+        src: ../compose/homer.yml
+        dest: /compose/homer.yml
+        owner: ubuntu
+        group: ubuntu
+
+    - name: "Bring up Compose service stack"
+      community.docker.docker_compose:
+        project_src: /compose
