@@ -146,7 +146,7 @@ services:
         logo: "assets/tools/sample.png"
         # icon: "fab fa-jenkins"
         tag: "other"
-        url: "http://radar.local"
+        url: "http://radarr.local"
       - name: "Sonarr"
         logo: "assets/tools/sample.png"
         # icon: "fab fa-jenkins"
