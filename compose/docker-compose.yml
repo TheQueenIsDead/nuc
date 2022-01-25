@@ -98,7 +98,7 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homer.rule=Host(`homer.local`)"
+      - "traefik.http.routers.homer.rule=Host(`homer.local`, `home.local`)"
       - "traefik.http.routers.homer.entrypoints=web"
     networks:
       - internal
