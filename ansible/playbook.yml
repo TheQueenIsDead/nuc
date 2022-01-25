@@ -9,6 +9,7 @@
     - geerlingguy.pip
     - geerlingguy.docker_arm
 
+  gather_facts: false
   tasks:
     - name: "Create compose directory"
       file:
@@ -32,3 +33,9 @@
     - name: "Bring up Compose service stack"
       community.docker.docker_compose:
         project_src: /compose
+
+    - name: "Provision internal DNS on PiHole via Terraform"
+      delegate_to: localhost
+      community.general.terraform:
+        project_path: ../terraform
+        state: present
