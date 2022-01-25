@@ -25,7 +25,7 @@ Add the installation of net tools to ansible
 Disable port 53 for some servers via ansible:
 https://codepre.com/ubuntu-how-to-release-port-53-used-by-systemd-resolved.html
 
-Use something like this
+Automount the storage NAS with fsck
 
 # Stuff
 
