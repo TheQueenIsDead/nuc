@@ -118,7 +118,9 @@ services:
         # icon: "fab fa-jenkins"
         subtitle: "Bookmark example"
         tag: "app"
-        url: "http://ingress.local"
+        # TODO: Host Traefik on friendly local domain
+        #        url: "http://ingress.local"
+        url: "http://192.168.0.69:8080"
         target: "_blank" # optional html tag target attribute
 
       - name: "Huawei HG659"
@@ -143,12 +145,12 @@ services:
     icon: "fas fa-heartbeat"
     items:
       - name: "Prometheus"
-#        logo: "assets/tools/sample.png"
+        #        logo: "assets/tools/sample.png"
         icon: "fab fa-jenkins"
         tag: "other"
         url: "http://prom.local"
       - name: "Grafana"
-#        logo: "assets/tools/sample.png"
+        #        logo: "assets/tools/sample.png"
         icon: "fab fa-jenkins"
         tag: "other"
         url: "http://grafana.local"
