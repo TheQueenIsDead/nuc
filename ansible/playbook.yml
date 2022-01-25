@@ -30,6 +30,13 @@
         owner: ubuntu
         group: ubuntu
 
+    - name: "Copy prometheus.yml to server"
+      ansible.builtin.copy:
+        src: ../compose/prometheus.yml
+        dest: /compose/prometheus.yml
+        owner: ubuntu
+        group: ubuntu
+
     - name: "Bring up Compose service stack"
       community.docker.docker_compose:
         project_src: /compose

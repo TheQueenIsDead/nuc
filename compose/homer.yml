@@ -139,6 +139,20 @@ services:
         # class: "green" # optional custom CSS class for card, useful with custom stylesheet
         # background: red # optional color for card to set color directly without custom stylesheet
 
+  - name: "Monitoring"
+    icon: "fas fa-heartbeat"
+    items:
+      - name: "Prometheus"
+#        logo: "assets/tools/sample.png"
+        icon: "fab fa-jenkins"
+        tag: "other"
+        url: "http://prom.local"
+      - name: "Grafana"
+#        logo: "assets/tools/sample.png"
+        icon: "fab fa-jenkins"
+        tag: "other"
+        url: "http://grafana.local"
+
   - name: "Media"
     icon: "fas fa-heartbeat"
     items:
