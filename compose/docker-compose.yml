@@ -126,8 +126,7 @@ services:
 
   sonarr:
     restart: unless-stopped
-    image: linuxserver/sonarr:latest
-#    image: lscr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr
     container_name: sonarr
     environment:
       - PUID=1000
@@ -138,7 +137,7 @@ services:
       - /mnt/storage/tvseries:/tv #optional
       - /mnt/storage/downloads:/downloads #optional
     expose:
-      - 7878
+      - 8989
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.local`)"
