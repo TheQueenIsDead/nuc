@@ -89,25 +89,24 @@ message:
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
-  - name: "Link 1"
-    icon: "fab fa-github"
-    url: "https://github.com/bastienwirtz/homer"
-    target: "_blank" # optional html tag target attribute
-  - name: "link 2"
-    icon: "fas fa-book"
-    url: "https://github.com/bastienwirtz/homer"
-  # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
-  # see url field and assets/page.yml used in this example:
-  - name: "Second Page"
-    icon: "fas fa-file-alt"
-    url: "#page2"
+  - name: "GitHub"
+    icon: "fas fa-github"
+    url: "https://github.com/TheQueenIsDead/homer"
+  - name: "Pi Host Dashboard"
+    icon: "fas fa-tachometer-alt"
+    url: "http://grafana.local/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m"
+#  # this will link to a second homer page that will load config from page2.yml and keep default config values as in config.yml file
+#  # see url field and assets/page.yml used in this example:
+#  - name: "Second Page"
+#    icon: "fas fa-file-alt"
+#    url: "#page2"
 
 # Services
 # First level array represents a group.
 # Leave only a "items" key if not using group (group name, icon & tagstyle are optional, section separation will not be displayed).
 services:
   - name: "Routing"
-    icon: "fas fa-code-branch"
+    icon: "fas fa-network-wired"
     # A path to an image can also be provided. Note that icon take precedence if both icon and logo are set.
     # logo: "path/to/logo"
     items:
@@ -116,7 +115,7 @@ services:
         logo: "assets/tools/sample.png"
         # Alternatively a fa icon can be provided:
         # icon: "fab fa-jenkins"
-        subtitle: "Bookmark example"
+        subtitle: "Web Routing, Ingress, and Middleware"
         tag: "app"
         # TODO: Host Traefik on friendly local domain
         #        url: "http://ingress.local"
@@ -132,7 +131,7 @@ services:
         url: "http://192.168.0.1"
 
       - name: "Pi-hole"
-        logo: "assets/tools/sample.png"
+        logo: "https://avatars.githubusercontent.com/u/16827203?s=200&v=4"
         # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
         tag: "other"
         url: "http://pihole.local/admin"
@@ -145,36 +144,26 @@ services:
     icon: "fas fa-heartbeat"
     items:
       - name: "Prometheus"
-        #        logo: "assets/tools/sample.png"
-        icon: "fab fa-jenkins"
-        tag: "other"
+        logo: "https://avatars.githubusercontent.com/u/3380462?s=200&v=4"
         url: "http://prom.local"
       - name: "Grafana"
-        #        logo: "assets/tools/sample.png"
-        icon: "fab fa-jenkins"
-        tag: "other"
+        logo: "https://avatars.githubusercontent.com/u/7195757?s=200&v=4"
         url: "http://grafana.local"
 
   - name: "Media"
-    icon: "fas fa-heartbeat"
+    icon: "fas fa-photo-video"
     items:
       - name: "Radarr"
-        logo: "assets/tools/sample.png"
-        # icon: "fab fa-jenkins"
-        tag: "other"
+        logo: "https://avatars1.githubusercontent.com/u/25025331?s=200&v=4"
         url: "http://radarr.local"
       - name: "Sonarr"
-        logo: "assets/tools/sample.png"
-        # icon: "fab fa-jenkins"
-        tag: "other"
+        logo: "https://avatars.githubusercontent.com/u/1082903?s=200&v=4"
         url: "http://sonarr.local"
 
   - name: "Other group"
-    icon: "fas fa-heartbeat"
+    icon: "fas fa-question-circle"
     items:
       - name: "SpeedTest"
-        logo: "assets/tools/sample.png"
-        # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
+        logo: "https://raw.githubusercontent.com/librespeed/speedtest/master/.logo/icon_huge.png"
+        # subtitle: "Network-wide Ad Blocking"
         url: "http://speedtest.local"
-        target: "_blank" # optional html a tag target attribute
