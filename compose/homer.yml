@@ -64,25 +64,6 @@ colors:
     link-hover: "#ffdd57"
     background-image: "assets/your/dark/bg.png"
 
-# Optional message
-message:
-  # url: "https://<my-api-endpoint>" # Can fetch information from an endpoint to override value below.
-  # mapping: # allows to map fields from the remote format to the one expected by Homer
-  #   title: 'id' # use value from field 'id' as title
-  #   content: 'value' # value from field 'value' as content
-  # refreshInterval: 10000 # Optional: time interval to refresh message
-  #
-  # Real example using chucknorris.io for showing Chuck Norris facts as messages:
-  # url: https://api.chucknorris.io/jokes/random
-  # mapping:
-  #   title: 'id'
-  #   content: 'value'
-  # refreshInterval: 10000
-  style: "is-warning"
-  title: "Optional message!"
-  icon: "fa fa-exclamation-triangle"
-  content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-
 # Optional navbar
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
@@ -139,6 +120,7 @@ services:
       - name: "Prometheus"
         logo: "https://avatars.githubusercontent.com/u/3380462?s=200&v=4"
         url: "http://prom.local"
+        type: "Prometheus"
       - name: "Grafana"
         logo: "https://avatars.githubusercontent.com/u/7195757?s=200&v=4"
         url: "http://grafana.local"
