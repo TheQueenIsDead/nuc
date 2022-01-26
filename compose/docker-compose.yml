@@ -27,7 +27,6 @@ services:
       - internal
       - external
 
-
   # https://pi-hole.net/
   # https://github.com/pi-hole/docker-pi-hole/blob/master/docker_run.sh
   pihole:
@@ -69,6 +68,10 @@ services:
       - "traefik.http.routers.pihole.rule=Host(`pihole.local`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.http.routers.pihole.entrypoints=web"
+      - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Origin=home.local"
+      - "traefik.http.middlewares.pihole.headers.customresponseheaders.X-Powered-By=myass"
+      - "traefik.http.routers.pihole.middlewares=pihole"
+
 
   speedtest:
     restart: unless-stopped
