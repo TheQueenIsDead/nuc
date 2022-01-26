@@ -13,10 +13,7 @@ logo: "assets/logo.png"
 # Alternatively a fa icon can be provided:
 # icon: "fas fa-skull-crossbones"
 
-header: true # Set to false to hide the header
-# Optional: Different hotkey for search, defaults to "/"
-# hotkey:
-#   search: "Shift"
+header: false
 footer: '<p>Created with <span class="has-text-danger">❤️</span> with <a href="https://bulma.io/">bulma</a>, <a href="https://vuejs.org/">vuejs</a> & <a href="https://fontawesome.com/">font awesome</a> // Fork me on <a href="https://github.com/bastienwirtz/homer"><i class="fab fa-github-alt"></i></a></p>' # set false if you want to hide it.
 
 columns: "3" # "auto" or number (must be a factor of 12: 1, 2, 3, 4, 6, 12)
@@ -133,12 +130,8 @@ services:
       - name: "Pi-hole"
         logo: "https://avatars.githubusercontent.com/u/16827203?s=200&v=4"
         # subtitle: "Network-wide Ad Blocking" # optional, if no subtitle is defined, PiHole statistics will be shown
-        tag: "other"
         url: "http://pihole.local/admin"
         type: "PiHole" # optional, loads a specific component that provides extra features. MUST MATCH a file name (without file extension) available in `src/components/services`
-        target: "_blank" # optional html a tag target attribute
-        # class: "green" # optional custom CSS class for card, useful with custom stylesheet
-        # background: red # optional color for card to set color directly without custom stylesheet
 
   - name: "Monitoring"
     icon: "fas fa-heartbeat"
