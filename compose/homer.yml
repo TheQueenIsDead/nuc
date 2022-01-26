@@ -90,15 +90,11 @@ services:
     items:
 
       - name: "Traefik"
-        logo: "assets/tools/sample.png"
-        # Alternatively a fa icon can be provided:
-        # icon: "fab fa-jenkins"
+        logo: "https://avatars.githubusercontent.com/u/14280338?s=200&v=4"
         subtitle: "Web Routing, Ingress, and Middleware"
-        tag: "app"
         # TODO: Host Traefik on friendly local domain
-        #        url: "http://ingress.local"
+#        url: "http://ingress.local"
         url: "http://192.168.0.69:8080"
-        target: "_blank" # optional html tag target attribute
 
       - name: "Huawei HG659"
         logo: "assets/tools/sample2.png"
