@@ -68,7 +68,7 @@ colors:
 # links: [] # Allows for navbar (dark mode, layout, and search) without any links
 links:
   - name: "GitHub"
-    icon: "fas fa-github"
+    icon: "fab fa-github"
     url: "https://github.com/TheQueenIsDead/homer"
   - name: "Pi Host Dashboard"
     icon: "fas fa-tachometer-alt"
