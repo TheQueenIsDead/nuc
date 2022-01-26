@@ -69,7 +69,7 @@ colors:
 links:
   - name: "GitHub"
     icon: "fab fa-github"
-    url: "https://github.com/TheQueenIsDead/homer"
+    url: "https://github.com/TheQueenIsDead"
   - name: "Pi Host Dashboard"
     icon: "fas fa-tachometer-alt"
     url: "http://grafana.local/d/rYdddlPWk/node-exporter-full?orgId=1&refresh=1m"
