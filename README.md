@@ -18,7 +18,19 @@ sudo apt install ansible
 # TODO
 
 ## Tools
-Add the installation of net tools to ansible
+Add the installation of net tools / other Ubuntu libs to ansible
+
+
+## Services
+ - Gitlab & Runner
+ - CloudFlare Tunnel
+ - Prowlarr
+ - [WatchTower?](https://containrrr.dev/watchtower/introduction/)
+ - Jellyfin
+ - Statping / StatpingNg
+ - Uptime Kuma
+ - fail2ban
+ - 
 
 
 ## Server Config
