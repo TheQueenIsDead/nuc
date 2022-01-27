@@ -5,7 +5,7 @@ services:
   # https://traefik.io/
   traefik:
     restart: always
-    image: "traefik:v2.5"
+    image: "traefik:v2.6"
     container_name: "traefik"
     command:
       - "--log.level=DEBUG"
