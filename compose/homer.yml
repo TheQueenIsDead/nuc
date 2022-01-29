@@ -130,6 +130,17 @@ services:
       - name: "Sonarr"
         logo: "https://avatars.githubusercontent.com/u/1082903?s=200&v=4"
         url: "http://sonarr.local"
+      - name: "Prowlarr"
+        logo: "https://avatars.githubusercontent.com/u/73049443?s=200&v=4"
+        url: "http://prowlarr.local"
+      - name: "Transmission"
+        logo: "https://avatars.githubusercontent.com/u/223312?s=200&v=4"
+        url: "http://transmission.local"
+      - name: "Jackett"
+        logo: "https://avatars.githubusercontent.com/u/15383019?s=200&v=4"
+        url: "http://jackett.local"
+
+
 
   - name: "Other group"
     icon: "fas fa-question-circle"
