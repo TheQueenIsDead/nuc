@@ -179,7 +179,7 @@ services:
 #      - RUN_OPTS=<run options here> #optional
     volumes:
       - /mnt/storage/jackett/config:/config
-      - /mnt/storage/jackett/downloads:/downloads
+      - /mnt/storage/downloads:/downloads
     expose:
       - 9117
     labels:
@@ -200,7 +200,7 @@ services:
       - TZ=Pacific/Auckland
     volumes:
       - /mnt/storage/transmission/config:/config
-      - /mnt/storage/downloads:/downloads/complete
+      - /mnt/storage/downloads:/downloads
     expose:
       - 9091 # Web UI port
       - 51413 # Torrent port (TCP)
