@@ -70,6 +70,7 @@ services:
       - "traefik.http.routers.pihole.entrypoints=web"
       - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Origin=home.local"
       - "traefik.http.middlewares.pihole.headers.customresponseheaders.X-Powered-By=myass"
+      - "traefik.http.middlewares.pihole.headers.customrequestheaders.Origin=http://pihole.local"
       - "traefik.http.routers.pihole.middlewares=pihole"
 
 
