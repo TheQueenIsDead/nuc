@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+
+  # https://traefik.io/
+  traefik:
+    restart: always
+    image: "traefik:v2.5"
+    container_name: "traefik"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    labels:
+      # https://stackoverflow.com/questions/61572512/expose-traefik-dashboard-to-subdomain
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`ingress.local`)"
+      - "traefik.http.routers.dashboard.entrypoints=web"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks: # Allow traefik to view public and private facing applications.
+      - internal
+      - external
+
+
+  speedtest:
+    restart: unless-stopped
+    image: lscr.io/linuxserver/librespeed
+    container_name: speedtest
+    environment:
+      PUID: 1000
+      PGID: 1000
+      TZ: Pacific/Auckland
+      PASSWORD: testing123
+    ports:
+      - 6969:80
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.speedtest.rule=Host(`speedtest.local`)"
+      - "traefik.http.routers.speedtest.entrypoints=web"
+      - "traefik.http.middlewares.speedtest.headers.customresponseheaders.Access-Control-Allow-Origin=*.local"
+      - "traefik.http.middlewares.speedtest.headers.customresponseheaders.x-Powered-By=beans"
+      - "traefik.http.routers.speedtest.middlewares=speedtest"
+
+    networks:
+      - internal
+
+
+networks:
+  internal:
+  external:
