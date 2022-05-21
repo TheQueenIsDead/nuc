@@ -1,5 +1,5 @@
 locals {
-  ingress_ip       = "192.168.0.69"
+  ingress_ip       = "192.168.0.169"
   # All subdomains for the `local` domain
   # Eg, "demo.local"
   local_subdomains = {
