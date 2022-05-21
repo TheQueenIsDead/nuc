@@ -20,22 +20,22 @@
       ansible.builtin.copy:
         src: ../compose/docker-compose.yml
         dest: /compose/docker-compose.yml
-        owner: ubuntu
-        group: ubuntu
+        owner: pi
+        group: pi
 
     - name: "Copy homer.yml to server"
       ansible.builtin.copy:
         src: ../compose/homer.yml
         dest: /compose/homer.yml
-        owner: ubuntu
-        group: ubuntu
+        owner: pi
+        group: pi
 
     - name: "Copy prometheus.yml to server"
       ansible.builtin.copy:
         src: ../compose/prometheus.yml
         dest: /compose/prometheus.yml
-        owner: ubuntu
-        group: ubuntu
+        owner: pi
+        group: pi
 
     - name: "Bring up Compose service stack"
       community.docker.docker_compose:
