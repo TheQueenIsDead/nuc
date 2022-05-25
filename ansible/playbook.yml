@@ -11,29 +11,30 @@
 
   gather_facts: false
   tasks:
+
+    - name: "Debug config.json post register"
+      ansible.builtin.debug:
+        var: config
+      delegate_to: localhost
+
+    - name: "Write FQDN to Docker config file"
+      ansible.builtin.lineinfile:
+        path: ../compose/.env
+        search_string: "{{ item.key | capitalize }}_FQDN"
+        state: present
+        line: "{{ item.key | upper }}_FQDN={{item.value}}.{{ config.domain }}"
+      loop: "{{ lookup('dict', config.subdomains) }}"
+      delegate_to: localhost
+
     - name: "Create compose directory"
       file:
         path: /compose
         state: directory
 
-    - name: "Copy docker-compose.yml to server"
+    - name: "Copy docker-compose config to server"
       ansible.builtin.copy:
-        src: ../compose/docker-compose.yml
-        dest: /compose/docker-compose.yml
-        owner: pi
-        group: pi
-
-    - name: "Copy homer.yml to server"
-      ansible.builtin.copy:
-        src: ../compose/homer.yml
-        dest: /compose/homer.yml
-        owner: pi
-        group: pi
-
-    - name: "Copy prometheus.yml to server"
-      ansible.builtin.copy:
-        src: ../compose/prometheus.yml
-        dest: /compose/prometheus.yml
+        src: ../compose/
+        dest: /compose/
         owner: pi
         group: pi
 

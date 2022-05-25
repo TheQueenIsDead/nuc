@@ -1,0 +1,22 @@
+{
+  "config": {
+    "domain": "pi.local",
+    "subdomains": {
+      "traefik": "ingress",
+      "pihole": "pihole",
+      "speedtest": "speedtest",
+      "homer": "home",
+      "radarr": "radarr",
+      "sonarr": "sonarr",
+      "prowlarr": "prowlarr",
+      "jackett": "jackett",
+      "transmission": "transmission",
+      "node_exporter": "exporter",
+      "prometheus": "prom",
+      "grafana": "grafana"
+    },
+    "example": "nowt"
+  }
+}
+
+
