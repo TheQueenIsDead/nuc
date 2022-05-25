@@ -58,6 +58,9 @@ https://codecaptured.com/blog/self-hosting-pi-hole-with-docker-and-traefik/
 LibraSpeed test:
 https://github.com/librespeed/speedtest
 
+Potentially helpful for configuring internal domain access when moving to a publicly hosted domain:
+https://medium.com/@containeroo/using-pi-hole-to-route-your-services-internally-2ff495093718
+
 
 Cool guys making images:
 https://www.linuxserver.io/
