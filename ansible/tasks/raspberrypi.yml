@@ -1,0 +1,8 @@
+---
+- name: "Install pip on the host"
+  include_role:
+    name: geerlingguy.pip
+
+- name: "Install Docker on the ARM host"
+  include_role:
+    name: geerlingguy.pip

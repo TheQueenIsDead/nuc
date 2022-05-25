@@ -4,46 +4,41 @@
 
   vars:
     pip_package: python3-pip
-
-  roles:
-    - geerlingguy.pip
-    - geerlingguy.docker_arm
+    compose_directory: "{{ playbook_dir }}/../compose"
+    terraform_directory: "{{ playbook_dir }}/../terraform"
 
   gather_facts: false
+
   tasks:
+    - name: "Initialise config"
+      include_tasks:
+        file: ./tasks/config.yml
+        apply:
+          tags:
+            - config
 
-    - name: "Debug config.json post register"
-      ansible.builtin.debug:
-        var: config
-      delegate_to: localhost
+    - name: "Configure ARM Host"
+      include_tasks:
+        file: ./tasks/raspberrypi.yml
+        apply:
+          tags:
+            - host
+            - pi
 
-    - name: "Write FQDN to Docker config file"
-      ansible.builtin.lineinfile:
-        path: ../compose/.env
-        search_string: "{{ item.key | capitalize }}_FQDN"
-        state: present
-        line: "{{ item.key | upper }}_FQDN={{item.value}}.{{ config.domain }}"
-      loop: "{{ lookup('dict', config.subdomains) }}"
-      delegate_to: localhost
+    - name: "Deploy docker-compose"
+      include_tasks:
+        file: ./tasks/compose.yml
+        apply:
+          tags:
+            - docker
+            - app
+            - compose
 
-    - name: "Create compose directory"
-      file:
-        path: /compose
-        state: directory
-
-    - name: "Copy docker-compose config to server"
-      ansible.builtin.copy:
-        src: ../compose/
-        dest: /compose/
-        owner: pi
-        group: pi
-
-    - name: "Bring up Compose service stack"
-      community.docker.docker_compose:
-        project_src: /compose
-
-    - name: "Provision internal DNS on PiHole via Terraform"
-      delegate_to: localhost
-      community.general.terraform:
-        project_path: ../terraform
-        state: present
+    - name: "Terraform internal DNS"
+      include_tasks:
+        file: ./tasks/terraform.yml
+        apply:
+          tags:
+            - terraform
+            - dns
+            - pihole

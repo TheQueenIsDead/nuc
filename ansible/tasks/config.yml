@@ -1,0 +1,14 @@
+---
+- name: "Debug config.json post register"
+  ansible.builtin.debug:
+    var: config
+  delegate_to: localhost
+
+- name: "Write FQDN to Docker config file"
+  ansible.builtin.lineinfile:
+    path: "{{ compose_directory }}/.env"
+    search_string: "{{ item.key | capitalize }}_FQDN"
+    state: present
+    line: "{{ item.key | upper }}_FQDN={{item.value}}.{{ config.domain }}"
+  loop: "{{ lookup('dict', config.subdomains) }}"
+  delegate_to: localhost

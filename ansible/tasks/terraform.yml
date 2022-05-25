@@ -1,0 +1,6 @@
+---
+- name: "Provision internal DNS on PiHole via Terraform"
+  delegate_to: localhost
+  community.general.terraform:
+    project_path: "{{ terraform_directory }}"
+    state: present
