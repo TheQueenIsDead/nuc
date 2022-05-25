@@ -117,9 +117,9 @@ services:
       - PGID=1000
       - TZ=Pacific/Auckland
     volumes:
-      #      - /path/to/data:/config
-      - /mnt/storage/movies:/movies #optional
-      - /mnt/storage/downloads:/downloads #optional
+      - radarr_config_volume:/config
+      - movies_volume:/movies #optional
+      - downloads_volume:/downloads #optional
     expose:
       - 7878
     labels:
@@ -138,9 +138,9 @@ services:
       - PGID=1000
       - TZ=Pacific/Auckland
     volumes:
-#      - /path/to/data:/config
-      - /mnt/storage/tvseries:/tv #optional
-      - /mnt/storage/downloads:/downloads #optional
+      - sonarr_config_volume:/config
+      - tv_volume #optional
+      - downloads_volume:/downloads #optional
     expose:
       - 8989
     labels:
@@ -159,7 +159,7 @@ services:
       - PGID=1000
       - TZ=Pacific/Auckland
     volumes:
-      - /mnt/storage/prowlarr:/config
+      - prowlarr_config_volume:/config
     expose:
       - 9696
     labels:
@@ -180,8 +180,8 @@ services:
       - AUTO_UPDATE=true #optional
 #      - RUN_OPTS=<run options here> #optional
     volumes:
-      - /mnt/storage/jackett/config:/config
-      - /mnt/storage/downloads:/downloads
+      - jackett_config_volume:/config
+      - downloads_volume:/downloads
     expose:
       - 9117
     labels:
@@ -201,8 +201,8 @@ services:
       - PGID=1000
       - TZ=Pacific/Auckland
     volumes:
-      - /mnt/storage/transmission/config:/config
-      - /mnt/storage/downloads:/downloads
+      - transmission_config_volume:/config
+      - downloads_volume:/downloads
     expose:
       - 9091 # Web UI port
       - 51413 # Torrent port (TCP)
@@ -238,7 +238,7 @@ services:
     restart: unless-stopped
     volumes:
       - /compose/prometheus.yml:/etc/prometheus/prometheus.yml
-      - /mnt/storage/prometheus:/prometheus
+      - prometheus_volume:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -268,9 +268,25 @@ services:
       - "traefik.http.routers.grafana.rule=Host(`${GRAFANA_FQDN}`)"
       - "traefik.http.routers.grafana.entrypoints=web"
     volumes:
-      - /mnt/storage/grafana:/var/lib/grafana:rw
+      - grafana_volume:/var/lib/grafana:rw
     networks:
       - internal
+
+volumes:
+  # Service config volumes
+  ## Misc
+  prometheus_volume:
+  grafana_volume:
+  transmission_config_volume:
+  # Arr config
+  jackett_config_volume:
+  radarr_config_volume:
+  sonarr_config_volume:
+  prowlarr_config_volume:
+  # Media volumes
+  downloads_volume:
+  movies_volume:
+  tv_volume:
 
 networks:
   internal:
