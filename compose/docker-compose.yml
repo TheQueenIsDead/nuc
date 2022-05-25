@@ -104,7 +104,7 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homer.rule=Host(${HOMER_FQDN}`)"
+      - "traefik.http.routers.homer.rule=Host(`${HOMER_FQDN}`)"
       - "traefik.http.routers.homer.entrypoints=web"
     networks:
       - internal
@@ -214,8 +214,6 @@ services:
       - "traefik.http.routers.transmission.entrypoints=web"
     networks:
       - internal
-
-
 
   node_exporter:
     image: prom/node-exporter:latest
