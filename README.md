@@ -39,6 +39,11 @@ https://codepre.com/ubuntu-how-to-release-port-53-used-by-systemd-resolved.html
 
 Automount the storage NAS with fsck
 
+Configure IPV6 support for PiHole in order to allow Windows clients to easily connect 
+(Clients default to IPv6 DNS lookup if enabled)
+
+Create a single place to define variables, and interpolate where needed.
+
 # Stuff
 
 Editing systemd to enable docker over TCP
