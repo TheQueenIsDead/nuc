@@ -1,7 +1,8 @@
 locals {
   ingress_ip       = "192.168.0.169"
-  # All subdomains for the `local` domain
-  # Eg, "demo.local"
+  # All domains for the 'main' domain
+  # Eg, "demo.pi.local"
+  local_domain = "pi.local"
   local_subdomains = {
     "demo"         = local.ingress_ip
     "grafana"      = local.ingress_ip

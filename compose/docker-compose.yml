@@ -1,5 +1,7 @@
 version: '3.8'
 
+# All services meant to be run on pi.local domain.
+
 services:
 
   # https://traefik.io/
@@ -16,7 +18,7 @@ services:
     labels:
       # https://stackoverflow.com/questions/61572512/expose-traefik-dashboard-to-subdomain
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`ingress.local`)"
+      - "traefik.http.routers.dashboard.rule=Host(`ingress.pi.local`)"
       - "traefik.http.routers.dashboard.entrypoints=web"
     ports:
       - "80:80"
@@ -45,8 +47,8 @@ services:
       WEBPASSWORD: 'PASSWORD'
       PIHOLE_DNS_: 9.9.9.9;149.112.112.112;1.1.1.1
       DNSSEC: 'true'
-      ServerIP: 192.168.0.6 # Actual server IP. Matches DHCP conf file IP
-      VIRTUAL_HOST: pihole.local # Same as port traefik config
+      ServerIP: 192.168.0.169 # Actual server IP. Matches DHCP conf file IP
+      VIRTUAL_HOST: pihole.pi.local # Same as port traefik config
       DNSMASQ_LISTENING: all
       DHCP_ACTIVE: 'true'
       #      DHCP_START: 192.168.0.100
@@ -65,12 +67,12 @@ services:
       - internal
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.local`)"
+      - "traefik.http.routers.pihole.rule=Host(`pihole.pi.local`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.http.routers.pihole.entrypoints=web"
-      - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Origin=home.local"
+      - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Origin=home.pi.local"
       - "traefik.http.middlewares.pihole.headers.customresponseheaders.X-Powered-By=myass"
-      - "traefik.http.middlewares.pihole.headers.customrequestheaders.Origin=http://pihole.local"
+      - "traefik.http.middlewares.pihole.headers.customrequestheaders.Origin=http://pihole.pi.local"
       - "traefik.http.routers.pihole.middlewares=pihole"
 
 
@@ -87,7 +89,7 @@ services:
       - 80
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.speedtest.rule=Host(`speedtest.local`)"
+      - "traefik.http.routers.speedtest.rule=Host(`speedtest.pi.local`)"
       - "traefik.http.routers.speedtest.entrypoints=web"
     networks:
       - internal
@@ -102,7 +104,7 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homer.rule=Host(`homer.local`, `home.local`)"
+      - "traefik.http.routers.homer.rule=Host(`homer.pi.local`, `home.pi.local`)"
       - "traefik.http.routers.homer.entrypoints=web"
     networks:
       - internal
@@ -123,7 +125,7 @@ services:
       - 7878
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.local`)"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.pi.local`)"
       - "traefik.http.routers.radarr.entrypoints=web"
     networks:
       - internal
@@ -144,7 +146,7 @@ services:
       - 8989
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.local`)"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pi.local`)"
       - "traefik.http.routers.sonarr.entrypoints=web"
     networks:
       - internal
@@ -163,7 +165,7 @@ services:
       - 9696
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.local`)"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.pi.local`)"
       - "traefik.http.routers.prowlarr.entrypoints=web"
     networks:
       - internal
@@ -185,7 +187,7 @@ services:
       - 9117
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jackett.rule=Host(`jackett.local`)"
+      - "traefik.http.routers.jackett.rule=Host(`jackett.pi.local`)"
       - "traefik.http.routers.jackett.entrypoints=web"
     networks:
       - internal
@@ -208,7 +210,7 @@ services:
       - 51413/udp # Torrent port (UDP)
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.transmission.rule=Host(`transmission.local`)"
+      - "traefik.http.routers.transmission.rule=Host(`transmission.pi.local`)"
       - "traefik.http.routers.transmission.entrypoints=web"
     networks:
       - internal
@@ -248,7 +250,7 @@ services:
       - '--web.enable-lifecycle'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prom.rule=Host(`prom.local`)"
+      - "traefik.http.routers.prom.rule=Host(`prom.pi.local`)"
       - "traefik.http.routers.prom.entrypoints=web"
     expose:
       - 9090
@@ -266,7 +268,7 @@ services:
       - 3000
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.local`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.pi.local`)"
       - "traefik.http.routers.grafana.entrypoints=web"
     volumes:
       - /mnt/storage/grafana:/var/lib/grafana:rw
