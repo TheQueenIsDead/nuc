@@ -12,3 +12,10 @@
     line: "{{ item.key | upper }}_FQDN={{item.value}}.{{ config.domain }}"
   loop: "{{ lookup('dict', config.subdomains) }}"
   delegate_to: localhost
+
+- name: "Template homer.yml.j2 file locally"
+  ansible.builtin.template:
+    src: "{{ compose_directory }}/homer.yml.j2"
+    dest: "{{ compose_directory }}/homer.yml"
+  delegate_to: localhost
+
