@@ -18,7 +18,7 @@ services:
     labels:
       # https://stackoverflow.com/questions/61572512/expose-traefik-dashboard-to-subdomain
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`ingress.pi.local`)"
+      - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_FQDN}`)"
       - "traefik.http.routers.dashboard.entrypoints=web"
     ports:
       - "80:80"
@@ -67,7 +67,7 @@ services:
       - internal
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pihole.rule=Host(`pihole.pi.local`)"
+      - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_FQDN}`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.http.routers.pihole.entrypoints=web"
       - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Origin=home.pi.local"
@@ -89,7 +89,7 @@ services:
       - 80
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.speedtest.rule=Host(`speedtest.pi.local`)"
+      - "traefik.http.routers.speedtest.rule=Host(`${SPEEDTEST_FQDN}`)"
       - "traefik.http.routers.speedtest.entrypoints=web"
     networks:
       - internal
@@ -104,7 +104,7 @@ services:
       - 8080
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homer.rule=Host(`homer.pi.local`, `home.pi.local`)"
+      - "traefik.http.routers.homer.rule=Host(${HOMER_FQDN}`)"
       - "traefik.http.routers.homer.entrypoints=web"
     networks:
       - internal
@@ -125,7 +125,7 @@ services:
       - 7878
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.radarr.rule=Host(`radarr.pi.local`)"
+      - "traefik.http.routers.radarr.rule=Host(`${RADARR_FQDN}`)"
       - "traefik.http.routers.radarr.entrypoints=web"
     networks:
       - internal
@@ -146,7 +146,7 @@ services:
       - 8989
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.sonarr.rule=Host(`sonarr.pi.local`)"
+      - "traefik.http.routers.sonarr.rule=Host(`${SONARR_FQDN}`)"
       - "traefik.http.routers.sonarr.entrypoints=web"
     networks:
       - internal
@@ -165,7 +165,7 @@ services:
       - 9696
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.pi.local`)"
+      - "traefik.http.routers.prowlarr.rule=Host(`${PROWLARR_FQDN}`)"
       - "traefik.http.routers.prowlarr.entrypoints=web"
     networks:
       - internal
@@ -187,7 +187,7 @@ services:
       - 9117
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jackett.rule=Host(`jackett.pi.local`)"
+      - "traefik.http.routers.jackett.rule=Host(`${JACKETT_FQDN}`)"
       - "traefik.http.routers.jackett.entrypoints=web"
     networks:
       - internal
@@ -210,7 +210,7 @@ services:
       - 51413/udp # Torrent port (UDP)
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.transmission.rule=Host(`transmission.pi.local`)"
+      - "traefik.http.routers.transmission.rule=Host(`${TRANSMISSION_FQDN}`)"
       - "traefik.http.routers.transmission.entrypoints=web"
     networks:
       - internal
@@ -250,7 +250,7 @@ services:
       - '--web.enable-lifecycle'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.prom.rule=Host(`prom.pi.local`)"
+      - "traefik.http.routers.prom.rule=Host(`${PROMETHEUS_FQDN}`)"
       - "traefik.http.routers.prom.entrypoints=web"
     expose:
       - 9090
@@ -268,7 +268,7 @@ services:
       - 3000
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`grafana.pi.local`)"
+      - "traefik.http.routers.grafana.rule=Host(`${GRAFANA_FQDN}`)"
       - "traefik.http.routers.grafana.entrypoints=web"
     volumes:
       - /mnt/storage/grafana:/var/lib/grafana:rw
