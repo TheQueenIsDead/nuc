@@ -1,6 +1,6 @@
 locals {
   # Import config from the top level config.json
-  import = jsondecode(file("${path.module}/../config.json"))
+  import = jsondecode(file("${path.module}/../../config.json"))
   # Unwrap the top level of config.json
   config = local.import.config
 
