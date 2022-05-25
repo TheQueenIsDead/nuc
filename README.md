@@ -1,5 +1,18 @@
 # Home Server
 
+# Deployment
+
+The top level `./ansible.sh` script acts as a single point of entry to ensure everything on the 
+server is configured appropriately.
+
+It is a wrapper for calling into `ansible` and passing in extra args that may be required.
+From this script the ansible playbook in the ansible directory is called, and it is responsible for 
+configuring the base server, as well as ensuring the contents of the `docker/` and `terraform/` 
+folders are executed.
+
+The ansible playbook reads values from `config.json` and uses this as the source of truth for templating
+the other aspects of the deployment.
+
 # Deployment tools
 
 Docker
