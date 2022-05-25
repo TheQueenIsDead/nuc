@@ -1,12 +1,7 @@
 ---
-- name: "Create compose directory"
-  file:
-    path: /compose
-    state: directory
-
 - name: "Copy docker-compose config to server"
   ansible.builtin.copy:
-    src: "{{ compose_directory }}"
+    src: "{{ compose_directory }}/"
     dest: /compose/
     owner: pi
     group: pi
