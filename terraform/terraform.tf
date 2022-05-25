@@ -13,7 +13,7 @@ terraform {
 
 provider "pihole" {
   # Configuration options
-  url      = "http://pihole.pi.local"
+  url      = "http://${local.subdomains.pihole}.${local.domain}"
   password = var.pihole_password
 }
 

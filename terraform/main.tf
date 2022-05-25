@@ -1,13 +1,13 @@
 # Internal DNS records
 # https://registry.terraform.io/providers/ryanwholey/pihole/latest/docs/resources/dns_record
 resource "pihole_dns_record" "local_record" {
-  for_each = local.local_subdomains
-  domain = "${each.key}.${local.local_domain}"
+  for_each = local.subdomains
+  domain = "${each.key}.${local.domain}"
   ip     = each.value
 }
 resource "pihole_dns_record" "local_record_www" {
-  for_each = local.local_subdomains
-  domain = "www.${each.key}.${local.local_domain}"
+  for_each = local.subdomains
+  domain = "www.${each.key}.${local.domain}"
   ip     = each.value
 }
 
