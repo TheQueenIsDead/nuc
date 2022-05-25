@@ -16,6 +16,8 @@
         apply:
           tags:
             - config
+      tags:
+        - always
 
     - name: "Configure ARM Host"
       include_tasks:
@@ -24,6 +26,8 @@
           tags:
             - host
             - pi
+      tags:
+        - always
 
     - name: "Deploy docker-compose"
       include_tasks:
@@ -33,6 +37,8 @@
             - docker
             - app
             - compose
+      tags:
+        - always
 
     - name: "Terraform internal DNS"
       include_tasks:
@@ -42,3 +48,5 @@
             - terraform
             - dns
             - pihole
+      tags:
+        - always
