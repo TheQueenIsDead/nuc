@@ -141,6 +141,13 @@ services:
         url: "http://jackett.pi.local"
 
 
+  - name: "Development"
+    icon: "fa-solid fa-code"
+    items:
+      - name: "Gitlab"
+        # https://about.gitlab.com/press/press-kit/
+        logo: "https://about.gitlab.com/images/press/logo/jpg/gitlab-logo-500.jpg"
+        url: "http://gitlab.pi.local"
 
   - name: "Other group"
     icon: "fas fa-question-circle"

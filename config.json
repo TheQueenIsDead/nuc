@@ -14,7 +14,8 @@
       "jackett": "jackett",
       "transmission": "transmission",
       "prometheus": "prom",
-      "grafana": "grafana"
+      "grafana": "grafana",
+      "gitlab": "gitlab"
     },
     "example": "nowt"
   }

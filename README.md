@@ -57,6 +57,19 @@ Configure IPV6 support for PiHole in order to allow Windows clients to easily co
 
 Create a single place to define variables, and interpolate where needed.
 
+Adjust Gitlab root password wither by omnibus config or post-install commands:
+https://stackoverflow.com/questions/60062065/gitlab-initial-root-password
+ - Look at the metrics
+
+Post install register the runner
+ - https://docs.gitlab.com/runner/install/docker.html#register-the-runner
+
+Gitlab runner configure to run pipeline containers in the same network:
+ - https://gitlab.com/gitlab-org/gitlab-runner/-/issues/6644#note_356811900
+
+Gitlab runner socket binding
+ - https://docs.gitlab.com/ee/ci/docker/using_docker_build.html#use-docker-socket-binding
+
 # Stuff
 
 Editing systemd to enable docker over TCP

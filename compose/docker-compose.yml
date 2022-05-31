@@ -266,6 +266,47 @@ services:
     networks:
       - internal
 
+  # Gitlab takes a little while to become ready (past the starting phase)
+  # Traefik filters out unready pods until the state changes. Ie, won't be immediately resolvable
+  gitlab:
+    # Default image, does not support arm64
+    # https://gitlab.com/groups/gitlab-org/-/epics/2370
+    # image: 'gitlab/gitlab-ce:latest'
+    # Community ARM build:
+    image: yrzr/gitlab-ce-arm64v8:latest
+    container_name: 'gitlab'
+    restart: always
+    hostname: "${GITLAB_FQDN}"
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://${GITLAB_FQDN}'
+    volumes:
+      - '/services/gitlab/config:/etc/gitlab'
+      - '/services/gitlab/logs:/var/log/gitlab'
+      - '/services/gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitlab.rule=Host(`${GITLAB_FQDN}`)"
+      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
+      - "traefik.http.routers.gitlab.entrypoints=web"
+    expose:
+      - 80
+    networks:
+      - internal
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner
+    restart: always
+    volumes:
+      - /services/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal
+
+
+
 volumes:
   # Service config volumes
   ## Misc
