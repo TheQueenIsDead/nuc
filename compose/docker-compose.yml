@@ -43,18 +43,16 @@ services:
       - 127.0.0.1
       - 9.9.9.9
     environment:
+      # https://github.com/pi-hole/docker-pi-hole#environment-variables
       TZ: "Pacific/Auckland"
       WEBPASSWORD: 'PASSWORD'
       PIHOLE_DNS_: 9.9.9.9;149.112.112.112;1.1.1.1
       DNSSEC: 'true'
       ServerIP: 192.168.0.169 # Actual server IP. Matches DHCP conf file IP
-      VIRTUAL_HOST: pihole.pi.local # Same as port traefik config
+      VIRTUAL_HOST: "${PIHOLE_FQDN}"
+      CORS_HOSTS: "${HOMER_FQDN}"
       DNSMASQ_LISTENING: all
       DHCP_ACTIVE: 'true'
-      #      DHCP_START: 192.168.0.100
-      #      DHCP_END: 192.168.0.199
-      #      DHCP_ROUTER: 192.168.0.1
-      #      DHCP_LEASETIME: 6
       WEBTHEME: default-dark
       PIHOLE_DOMAIN: lan
     volumes:
@@ -70,10 +68,6 @@ services:
       - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_FQDN}`)"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
       - "traefik.http.routers.pihole.entrypoints=web"
-      # https://github.com/bastienwirtz/homer/issues/296
-      - "traefik.http.middlewares.pihole.headers.customresponseheaders.Access-Control-Allow-Credentials=true"
-      # - "traefik.http.middlewares.pihole.headers.customrequestheaders.Origin=pi.hole" # awful
-      - "traefik.http.routers.pihole.middlewares=pihole"
 
   speedtest:
     restart: unless-stopped
