@@ -15,7 +15,8 @@
       "transmission": "transmission",
       "prometheus": "prom",
       "grafana": "grafana",
-      "gitlab": "gitlab"
+      "gitlab": "gitlab",
+      "jenkins": "jenkins"
     },
     "example": "nowt"
   }

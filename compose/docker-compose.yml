@@ -172,7 +172,7 @@ services:
       - PGID=1000
       - TZ=Pacific/Auckland
       - AUTO_UPDATE=true #optional
-#      - RUN_OPTS=<run options here> #optional
+    #      - RUN_OPTS=<run options here> #optional
     volumes:
       - jackett_config_volume:/config
       - downloads_volume:/downloads
@@ -302,6 +302,24 @@ services:
     volumes:
       - /services/gitlab-runner/config:/etc/gitlab-runner
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - internal
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    expose:
+      - 8080
+      - 50000
+    volumes:
+      - /services/jenkins/configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jenkins.rule=Host(`${JENKINS_FQDN}`)"
+      - "traefik.http.routers.jenkins.entrypoints=web"
     networks:
       - internal
 

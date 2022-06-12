@@ -148,6 +148,9 @@ services:
         # https://about.gitlab.com/press/press-kit/
         logo: "https://about.gitlab.com/images/press/logo/jpg/gitlab-logo-500.jpg"
         url: "http://gitlab.pi.local"
+      - name: "Jenkins"
+        logo: "https://spng.subpng.com/20180515/xw/kisspng-jenkins-docker-continuous-delivery-installation-so-5afa799de502c3.730639311526364573938.jpg"
+        url: "http://jenkins.pi.local"
 
   - name: "Other group"
     icon: "fas fa-question-circle"
