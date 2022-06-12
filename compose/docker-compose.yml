@@ -36,9 +36,11 @@ services:
     container_name: pihole
     # Requires 53 to be free, this mandates extra steps on Ubuntu by default
     # https://codepre.com/ubuntu-how-to-release-port-53-used-by-systemd-resolved.html
+    # Also requires 53 to be bound to a specific address in order to preserve name resolution in other containers
+    # https://discourse.pi-hole.net/t/solve-dns-resolution-in-other-containers-when-using-docker-pihole/31413
     ports:
       - "53:53/tcp"
-      - "53:53/udp"
+      - "${INGRESS_IP}:53:53/udp"
     dns:
       - 127.0.0.1
       - 9.9.9.9

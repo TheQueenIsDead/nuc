@@ -13,6 +13,14 @@
   loop: "{{ lookup('dict', config.subdomains) }}"
   delegate_to: localhost
 
+- name: "Write Host IP to Docker config file"
+  ansible.builtin.lineinfile:
+    path: "{{ compose_directory }}/.env"
+    search_string: "INGRESS_IP"
+    state: present
+    line: "INGRESS_IP={{ config.ingress_ip }}"
+  delegate_to: localhost
+
 - name: "Template homer.yml.j2 file locally"
   ansible.builtin.template:
     src: "{{ compose_directory }}/homer.yml.j2"
