@@ -124,6 +124,12 @@ services:
   - name: "Media"
     icon: "fas fa-photo-video"
     items:
+      - name: "Jellyfin"
+        logo: "https://jellyfin.org/images/banner-dark.svg"
+        url: "http://jellyfin.pi.local"
+      - name: "Plex"
+#        logo: "https://jellyfin.org/images/banner-dark.svg"
+        url: "http://plex.pi.local"
       - name: "Radarr"
         logo: "https://avatars1.githubusercontent.com/u/25025331?s=200&v=4"
         url: "http://radarr.pi.local"
@@ -140,17 +146,6 @@ services:
         logo: "https://avatars.githubusercontent.com/u/15383019?s=200&v=4"
         url: "http://jackett.pi.local"
 
-
-  - name: "Development"
-    icon: "fa-solid fa-code"
-    items:
-      - name: "Gitlab"
-        # https://about.gitlab.com/press/press-kit/
-        logo: "https://about.gitlab.com/images/press/logo/jpg/gitlab-logo-500.jpg"
-        url: "http://gitlab.pi.local"
-      - name: "Jenkins"
-        logo: "https://spng.subpng.com/20180515/xw/kisspng-jenkins-docker-continuous-delivery-installation-so-5afa799de502c3.730639311526364573938.jpg"
-        url: "http://jenkins.pi.local"
 
   - name: "Other group"
     icon: "fas fa-question-circle"

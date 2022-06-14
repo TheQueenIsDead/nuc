@@ -165,28 +165,48 @@ services:
     networks:
       - internal
 
-  jackett:
-    image: lscr.io/linuxserver/jackett
-    container_name: jackett
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    hostname: jellyfin
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=Pacific/Auckland
-      - AUTO_UPDATE=true #optional
-    #      - RUN_OPTS=<run options here> #optional
     volumes:
       - jackett_config_volume:/config
       - downloads_volume:/downloads
     expose:
-      - 9117
+      - 80
+      - 8096
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.jackett.rule=Host(`${JACKETT_FQDN}`)"
-      - "traefik.http.routers.jackett.entrypoints=web"
+      - "traefik.http.routers.jellyfin.rule=Host(`${JELLYFIN_FQDN}`)"
+      - "traefik.http.routers.jellyfin.entrypoints=web"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
     networks:
       - internal
 
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    hostname: plex
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+    volumes:
+      - plex_config_volume:/config
+      - media_volume:/media
+    expose:
+      - 32400
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.plex.rule=Host(`${PLEX_FQDN}`)"
+      - "traefik.http.routers.plex.entrypoints=web"
+      - "traefik.http.services.plex.loadbalancer.server.port=32400"
+    networks:
+      - internal
 
   transmission:
     image: lscr.io/linuxserver/transmission
