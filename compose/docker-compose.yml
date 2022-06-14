@@ -6,9 +6,10 @@ services:
 
   # https://traefik.io/
   traefik:
-    restart: always
     image: "traefik:v2.6"
     container_name: "traefik"
+    hostname: "traefik"
+    restart: always
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
@@ -34,6 +35,8 @@ services:
   pihole:
     image: pihole/pihole:latest
     container_name: pihole
+    hostname: pihole
+    restart: always
     # Requires 53 to be free, this mandates extra steps on Ubuntu by default
     # https://codepre.com/ubuntu-how-to-release-port-53-used-by-systemd-resolved.html
     # Also requires 53 to be bound to a specific address in order to preserve name resolution in other containers
@@ -62,7 +65,6 @@ services:
       - '/services/pihole/dnsmasq.d:/etc/dnsmasq.d/'
     cap_add:
       - NET_ADMIN
-    restart: unless-stopped
     networks:
       - internal
     labels:
@@ -72,9 +74,10 @@ services:
       - "traefik.http.routers.pihole.entrypoints=web"
 
   speedtest:
-    restart: unless-stopped
     image: lscr.io/linuxserver/librespeed
     container_name: speedtest
+    hostname: speedtest
+    restart: unless-stopped
     environment:
       PUID: 1000
       PGID: 1000
@@ -90,9 +93,10 @@ services:
       - internal
 
   homer:
-    restart: unless-stopped
     image: b4bz/homer:latest
     container_name: homer
+    hostname: homer
+    restart: unless-stopped
     volumes:
       - '/compose/homer.yml:/www/assets/config.yml'
     expose:
@@ -114,8 +118,7 @@ services:
       - TZ=Pacific/Auckland
     volumes:
       - radarr_config_volume:/config
-      - movies_volume:/movies #optional
-      - downloads_volume:/downloads #optional
+      - media_volume:/media
     expose:
       - 7878
     labels:
@@ -135,8 +138,7 @@ services:
       - TZ=Pacific/Auckland
     volumes:
       - sonarr_config_volume:/config
-      - tv_volume #optional
-      - downloads_volume:/downloads #optional
+      - media_volume:/media
     expose:
       - 8989
     labels:
@@ -147,9 +149,10 @@ services:
       - internal
 
   prowlarr:
-    restart: unless-stopped
     image: ghcr.io/linuxserver/prowlarr:develop
     container_name: prowlarr
+    hostname: prowlarr
+    restart: unless-stopped
     environment:
       - PUID=1000
       - PGID=1000
@@ -173,8 +176,9 @@ services:
     environment:
       - TZ=Pacific/Auckland
     volumes:
-      - jackett_config_volume:/config
-      - downloads_volume:/downloads
+      - jellyfin_volume:/config
+      - jellyfin_volume:/cache
+      - media_volume:/media
     expose:
       - 80
       - 8096
@@ -211,6 +215,7 @@ services:
   transmission:
     image: lscr.io/linuxserver/transmission
     container_name: transmission
+    hostname: transmission
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -218,7 +223,7 @@ services:
       - TZ=Pacific/Auckland
     volumes:
       - transmission_config_volume:/config
-      - downloads_volume:/downloads
+      - media_volume:/downloads
     expose:
       - 9091 # Web UI port
       - 51413 # Torrent port (TCP)
@@ -233,6 +238,7 @@ services:
   node_exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter
+    hostname: node-exporter
     restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
@@ -251,6 +257,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+    hostname: prometheus
     restart: unless-stopped
     volumes:
       - /compose/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -273,6 +280,7 @@ services:
   grafana:
     image: grafana/grafana
     container_name: grafana
+    hostname: grafana
     restart: unless-stopped
     environment:
       - PUID=1000
@@ -288,80 +296,29 @@ services:
     networks:
       - internal
 
-  # Gitlab takes a little while to become ready (past the starting phase)
-  # Traefik filters out unready pods until the state changes. Ie, won't be immediately resolvable
-  gitlab:
-    # Default image, does not support arm64
-    # https://gitlab.com/groups/gitlab-org/-/epics/2370
-    # image: 'gitlab/gitlab-ce:latest'
-    # Community ARM build:
-    image: yrzr/gitlab-ce-arm64v8:latest
-    container_name: 'gitlab'
-    restart: always
-    hostname: "${GITLAB_FQDN}"
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://${GITLAB_FQDN}'
-    volumes:
-      - '/services/gitlab/config:/etc/gitlab'
-      - '/services/gitlab/logs:/var/log/gitlab'
-      - '/services/gitlab/data:/var/opt/gitlab'
-    shm_size: '256m'
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.gitlab.rule=Host(`${GITLAB_FQDN}`)"
-      - "traefik.http.services.gitlab.loadbalancer.server.port=80"
-      - "traefik.http.routers.gitlab.entrypoints=web"
-    expose:
-      - 80
-    networks:
-      - internal
-
-  gitlab-runner:
-    image: gitlab/gitlab-runner:latest
-    container_name: gitlab-runner
-    restart: always
-    volumes:
-      - /services/gitlab-runner/config:/etc/gitlab-runner
-      - /var/run/docker.sock:/var/run/docker.sock
-    networks:
-      - internal
-
-  jenkins:
-    image: jenkins/jenkins:lts
-    container_name: jenkins
-    privileged: true
-    user: root
-    expose:
-      - 8080
-      - 50000
-    volumes:
-      - /services/jenkins/configuration:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.jenkins.rule=Host(`${JENKINS_FQDN}`)"
-      - "traefik.http.routers.jenkins.entrypoints=web"
-    networks:
-      - internal
-
-
-
 volumes:
   # Service config volumes
   ## Misc
   prometheus_volume:
+  jellyfin_volume:
   grafana_volume:
   transmission_config_volume:
-  # Arr config
+  plex_config_volume:
+  ## Arr config
   jackett_config_volume:
   radarr_config_volume:
   sonarr_config_volume:
   prowlarr_config_volume:
-  # Media volumes
-  downloads_volume:
-  movies_volume:
-  tv_volume:
+  # Media volumes - Ext HDD
+  # Volume from Device: https://serverfault.com/questions/1053820/can-docker-volumes-be-mounted-from-a-device-instead-of-bind-mounting-a-directory
+  # Escape option strings: https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag
+  # NTFS mount options: https://www.commandlinux.com/man-page/man8/mount.ntfs.8.html
+  media_volume:
+    driver: local
+    driver_opts:
+      type: ntfs
+      device: /dev/disk/by-uuid/5668681D6867FA5F
+      o: "umask=000,fmask=000,dmask=000"
 
 networks:
   internal:
