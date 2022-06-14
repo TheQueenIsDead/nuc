@@ -311,14 +311,11 @@ volumes:
   prowlarr_config_volume:
   # Media volumes - Ext HDD
   # Volume from Device: https://serverfault.com/questions/1053820/can-docker-volumes-be-mounted-from-a-device-instead-of-bind-mounting-a-directory
-  # Escape option strings: https://docs.docker.com/storage/volumes/#choose-the--v-or---mount-flag
-  # NTFS mount options: https://www.commandlinux.com/man-page/man8/mount.ntfs.8.html
   media_volume:
     driver: local
     driver_opts:
-      type: ntfs
-      device: /dev/disk/by-uuid/5668681D6867FA5F
-      o: "uid=1000,gid=1000,umask=000,fmask=000,dmask=000"
+      type: ext4
+      device: /dev/disk/by-uuid/6e364723-d629-4a55-988a-5255b917630c
 
 networks:
   internal:
