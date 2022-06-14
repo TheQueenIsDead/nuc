@@ -5,4 +5,4 @@
 
 - name: "Install Docker on the ARM host"
   include_role:
-    name: geerlingguy.pip
+    name: geerlingguy.docker_arm
