@@ -318,7 +318,7 @@ volumes:
     driver_opts:
       type: ntfs
       device: /dev/disk/by-uuid/5668681D6867FA5F
-      o: "umask=000,fmask=000,dmask=000"
+      o: "uid=1000,gid=1000,umask=000,fmask=000,dmask=000"
 
 networks:
   internal:
