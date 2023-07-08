@@ -1,6 +1,6 @@
 - name: "Home Infrastructure Setup"
 
-  hosts: rpi
+  hosts: nuc
 
   vars:
     pip_package: python3-pip
@@ -10,43 +10,56 @@
   gather_facts: false
 
   tasks:
-    - name: "Initialise config"
+    - name: "ping"
+      ping:
+
+    - name: "Install KVM"
       include_tasks:
-        file: ./tasks/config.yml
+        file: ./tasks/virt.yml
         apply:
           tags:
-            - config
+            - deps
       tags:
         - always
 
-    - name: "Configure ARM Host"
+    - name: "Configure VM's"
       include_tasks:
-        file: ./tasks/raspberrypi.yml
+        file: ./tasks/vm.yml
         apply:
           tags:
-            - host
-            - pi
+            - vm
       tags:
         - always
 
-    - name: "Deploy docker-compose"
-      include_tasks:
-        file: ./tasks/compose.yml
-        apply:
-          tags:
-            - docker
-            - app
-            - compose
-      tags:
-        - always
-
-    - name: "Terraform internal DNS"
-      include_tasks:
-        file: ./tasks/terraform.yml
-        apply:
-          tags:
-            - terraform
-            - dns
-            - pihole
-      tags:
-        - always
+#
+#    - name: "Configure ARM Host"
+#      include_tasks:
+#        file: ./tasks/raspberrypi.yml
+#        apply:
+#          tags:
+#            - host
+#            - pi
+#      tags:
+#        - always
+#
+#    - name: "Deploy docker-compose"
+#      include_tasks:
+#        file: ./tasks/compose.yml
+#        apply:
+#          tags:
+#            - docker
+#            - app
+#            - compose
+#      tags:
+#        - always
+#
+#    - name: "Terraform internal DNS"
+#      include_tasks:
+#        file: ./tasks/terraform.yml
+#        apply:
+#          tags:
+#            - terraform
+#            - dns
+#            - pihole
+#      tags:
+#        - always

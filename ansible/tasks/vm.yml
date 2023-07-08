@@ -1,0 +1,44 @@
+---
+
+- name: "Copy LXD init file"
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src: lxd.yml
+    dest: /tmp/
+    mode: '0644'
+
+- name: "Copy cloud-init file"
+  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+  ansible.builtin.copy:
+    src: cloud-init.yml
+    dest: /tmp/
+    mode: '0644'
+
+- name: "Launch LXD Initialization"
+  shell: lxd init --preseed < /tmp/lxd.yml
+
+- name: "Create LXD Virtual machine"
+  # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
+  community.general.lxd_container: &virtual-machine
+    name: cloud-init-3
+    type: virtual-machine
+    state: started
+    ignore_volatile_options: true
+    wait_for_ipv4_addresses: true
+    profiles: ["default"]
+    source:
+      protocol: simplestreams
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      alias: ubuntu/jammy/cloud
+    config:
+       user.user-data: "#cloud-config\r\nruncmd:\r\n  - echo 'Hello, World!' > /var/tmp/hello-world.txt"
+    timeout: 600
+
+#- name: "vm-2"
+#  community.general.lxd_container:
+#    <<: *virtual-machine
+#    name: new-vm-2
+
+
