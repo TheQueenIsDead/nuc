@@ -7,22 +7,22 @@
     compose_directory: "{{ playbook_dir }}/../compose"
     terraform_directory: "{{ playbook_dir }}/../terraform"
 
-  gather_facts: false
+#  gather_facts: false
 
   tasks:
     - name: "ping"
       ping:
 
-    - name: "Install KVM"
+    - name: "Configure Host"
       include_tasks:
-        file: ./tasks/virt.yml
+        file: ./tasks/host.yml
         apply:
           tags:
-            - deps
+            - host
       tags:
         - always
 
-    - name: "Configure VM's"
+    - name: "Provision Guest VMs"
       include_tasks:
         file: ./tasks/vm.yml
         apply:
@@ -31,17 +31,7 @@
       tags:
         - always
 
-#
-#    - name: "Configure ARM Host"
-#      include_tasks:
-#        file: ./tasks/raspberrypi.yml
-#        apply:
-#          tags:
-#            - host
-#            - pi
-#      tags:
-#        - always
-#
+#    # NOTE: This was used on the PI to orchestrate workloads and networking
 #    - name: "Deploy docker-compose"
 #      include_tasks:
 #        file: ./tasks/compose.yml

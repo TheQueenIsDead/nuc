@@ -7,22 +7,60 @@
     dest: /tmp/
     mode: '0644'
 
-- name: "Copy cloud-init file"
-  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
-  ansible.builtin.copy:
-    src: cloud-init.yml
-    dest: /tmp/
-    mode: '0644'
+#- name: "Copy cloud-init file"
+#  # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+#  ansible.builtin.copy:
+#    src: cloud-init.yml
+#    dest: /tmp/
+#    mode: '0644'
 
 - name: "Launch LXD Initialization"
   shell: lxd init --preseed < /tmp/lxd.yml
+
+- name: "Create LXD Profile (microk8s)"
+  # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_profile_module.html#ansible-collections-community-general-lxd-profile-module
+  community.general.lxd_profile:
+    name: microk8s
+    state: present
+    description: "MicroK8s profile"
+    config:
+      boot.autostart: "true"
+      linux.kernel_modules: ip_vs,ip_vs_rr,ip_vs_wrr,ip_vs_sh,ip_tables,ip6_tables,netlink_diag,nf_nat,overlay,br_netfilter
+      raw.lxc: |
+        lxc.apparmor.profile=unconfined
+        lxc.mount.auto=proc:rw sys:rw cgroup:rw
+        lxc.cgroup.devices.allow=a
+        lxc.cap.drop=
+      security.nesting: "true"
+      security.privileged: "true"
+    devices:
+      aadisable:
+        path: /sys/module/nf_conntrack/parameters/hashsize
+        source: /sys/module/nf_conntrack/parameters/hashsize
+        type: disk
+      aadisable2:
+        path: /dev/kmsg
+        source: /dev/kmsg
+        type: unix-char
+      aadisable3:
+        path: /sys/fs/bpf
+        source: /sys/fs/bpf
+        type: disk
+      aadisable4:
+        path: /proc/sys/net/netfilter/nf_conntrack_max
+        source: /proc/sys/net/netfilter/nf_conntrack_max
+        type: disk
+      hostport16443:
+        connect: tcp:127.0.0.1:16443
+        listen: tcp:0.0.0.0:16443
+        type: proxy
 
 - name: "Create LXD Virtual machine"
   # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
   community.general.lxd_container: &virtual-machine
     name: cloud-init-3
     type: virtual-machine
-    state: started
+    state: absent
     ignore_volatile_options: true
     wait_for_ipv4_addresses: true
     profiles: ["default"]
@@ -36,9 +74,58 @@
        user.user-data: "#cloud-config\r\nruncmd:\r\n  - echo 'Hello, World!' > /var/tmp/hello-world.txt"
     timeout: 600
 
-#- name: "vm-2"
-#  community.general.lxd_container:
-#    <<: *virtual-machine
-#    name: new-vm-2
+- ansible.builtin.debug:
+    msg: "the value of foo.txt is {{lookup('ansible.builtin.file', 'cloud-init.yml') }}"
+
+- name: "Create LXD Container (microk8s)"
+  # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
+  community.general.lxd_container:
+    name: microk8s-0
+    type: container
+    state: started
+#    state: absent
+    ignore_volatile_options: true
+    wait_for_ipv4_addresses: true
+    profiles: ["default", "microk8s"]
+    source:
+      protocol: simplestreams
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      alias: ubuntu/jammy/cloud
+    # https://raw.githubusercontent.com/openwhisk-blog/openwhisk.blog/master/content/post/kubernetes/microk8s-init.yaml
+    config:
+       user.user-data: "{{ lookup('ansible.builtin.file', 'cloud-init.yml') }}"
+    timeout: 30
 
 
+- name: "Export MicroK8s Kubeconfig"
+  ansible.builtin.command: lxc exec microk8s-0 -- sh -c 'microk8s config > /root/kubeconfig'
+
+- name: "Extract MicroK8s Kubeconfig"
+  ansible.builtin.command: lxc file pull microk8s-0/root/kubeconfig /tmp/kubeconfig
+
+- name: "Fetch MicroK8s Kubeconfig"
+  ansible.builtin.fetch:
+    src: /tmp/kubeconfig
+    dest: ./kubeconfig
+    flat: true
+
+- debug: var=ansible_default_ipv4.address
+
+- name: "Override Kubeconfig with ansible host IP"
+  delegate_to: localhost
+  ansible.builtin.replace:
+    path: kubeconfig
+    regexp: 'server: https://([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+):16443'
+    replace: "server: https://{{ ansible_default_ipv4.address }}:16443"
+
+# The SSL cert for the minikube server is only signed for internal IP's, resulting in:
+#     Unable to connect to the server: x509: certificate is valid for
+#     127.0.0.1, 10.152.183.1, 10.100.208.128, not 192.168.0.13
+- name: "Override Kubeconfig with ansible host IP"
+  delegate_to: localhost
+  ansible.builtin.replace:
+    path: kubeconfig
+    regexp: 'certificate-authority-data: .*'
+    replace: "insecure-skip-tls-verify: true"
