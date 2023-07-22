@@ -98,6 +98,26 @@
        user.user-data: "{{ lookup('ansible.builtin.file', 'cloud-init.yml') }}"
     timeout: 30
 
+- name: "Create LXD Container (pihole)"
+  # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
+  community.general.lxd_container:
+    name: pihole
+    type: virtual-machine
+    state: started
+#    state: absent
+    ignore_volatile_options: true
+    wait_for_ipv4_addresses: true
+    profiles: ["default"]
+    source:
+      protocol: simplestreams
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      alias: ubuntu/jammy/cloud
+    # https://raw.githubusercontent.com/openwhisk-blog/openwhisk.blog/master/content/post/kubernetes/microk8s-init.yaml
+    config:
+       user.user-data: "{{ lookup('ansible.builtin.file', 'cloud-init.pihole.yml') }}"
+    timeout: 30
 
 - name: "Export MicroK8s Kubeconfig"
   ansible.builtin.command: lxc exec microk8s-0 -- sh -c 'microk8s config > /root/kubeconfig'

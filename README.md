@@ -96,6 +96,9 @@ https://ubuntu.com/server/docs/virtualization-libvirt
 Interesting exemplar showing how to install k0s with ansible
 https://docs.k0sproject.io/v0.13.1/examples/ansible-playbook/
 
+Cloudflared in Kubernetes
+https://developers.cloudflare.com/cloudflare-one/tutorials/many-cfd-one-tunnel/
+
 ## Cloud Init
 
 Do it with ansible...
@@ -111,6 +114,9 @@ https://lxdware.com/forwarding-host-ports-to-lxd-instances/
 
 Bridge Networks
 https://documentation.ubuntu.com/lxd/en/latest/reference/network_bridge/#network-bridge
+
+Reverse Proxy:
+https://www.linode.com/docs/guides/beginners-guide-to-lxd-reverse-proxy/
 
 ## MicroK8s
 

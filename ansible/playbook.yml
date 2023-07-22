@@ -28,8 +28,22 @@
         apply:
           tags:
             - vm
+            - lxd
+            - minikube
+            - pihole
       tags:
         - always
+
+    - name: "Kubernetes"
+      include_tasks:
+        file: ./tasks/kubernetes.yml
+        apply:
+          tags:
+            - k8s
+            - kubernetes
+      tags:
+        - always
+
 
 #    # NOTE: This was used on the PI to orchestrate workloads and networking
 #    - name: "Deploy docker-compose"

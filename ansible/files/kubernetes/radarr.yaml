@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: radarr
+  namespace: default
+spec:
+  ports:
+    - port: 7878
+      targetPort: 7878
+  selector:
+    app: radarr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: radarr
+  namespace: default
+  labels:
+    app: radarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: radarr
+  template:
+    metadata:
+      labels:
+        app: radarr
+    spec:
+      containers:
+        - name: radarr
+          image: lscr.io/linuxserver/radarr:latest
+          ports:
+            - containerPort: 7878
+          volumeMounts:
+            - name: config
+              mountPath: /config
+              subPath: radarr
+            - name: media
+              mountPath: /media
+            - name: downloads
+              mountPath: /downloads
+      volumes:
+        - name: config
+        - name: media
+        - name: downloads

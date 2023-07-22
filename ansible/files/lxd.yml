@@ -13,6 +13,10 @@ storage_pools:
   description: ""
   name: default
   driver: dir
+- config: {}
+  description: ""
+  name: data
+  driver: dir
 profiles:
 - config: {}
   description: ""
