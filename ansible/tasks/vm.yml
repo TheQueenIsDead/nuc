@@ -54,6 +54,10 @@
         connect: tcp:127.0.0.1:16443
         listen: tcp:0.0.0.0:16443
         type: proxy
+      hostport80:
+        connect: tcp:127.0.0.1:80
+        listen: tcp:0.0.0.0:80
+        type: proxy
 
 - name: "Create LXD Virtual machine"
   # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source

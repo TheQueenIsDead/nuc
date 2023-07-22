@@ -5,7 +5,6 @@
     kubeconfig: kubeconfig
   register: api_status
 
-
 # https://raw.githubusercontent.com/cloudflare/cloudflare-ingress-controller/master/deploy/argo-tunnel.yaml
 - name: Download metrics-server manifest to the cluster.
   delegate_to: localhost

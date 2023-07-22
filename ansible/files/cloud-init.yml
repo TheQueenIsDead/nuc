@@ -16,6 +16,7 @@ runcmd:
   - chmod +x /etc/rc.local
   - microk8s start
   - microk8s status
+  - microk8s enable ingress
 apt_update: true
 apt_upgrade: true
 package_update: true
