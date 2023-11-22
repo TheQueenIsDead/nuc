@@ -5,20 +5,12 @@
     kubeconfig: kubeconfig
   register: api_status
 
-# https://raw.githubusercontent.com/cloudflare/cloudflare-ingress-controller/master/deploy/argo-tunnel.yaml
-- name: Download metrics-server manifest to the cluster.
-  delegate_to: localhost
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/cloudflare/argo-tunnel-examples/master/named-tunnel-k8s/cloudflared.yaml
-    dest: ~/cloudflared.yaml
-    mode: '0664'
-
-- name: Apply metrics-server manifest to the cluster.
+- name: Apply cloudflared manifest to the cluster.
   delegate_to: localhost
   kubernetes.core.k8s:
     kubeconfig: kubeconfig
     state: present
-    src: ~/cloudflared.yaml
+    src: 'kubernetes/cloudflared.yaml'
     namespace: default
 
 - name: Create volumes on K8s

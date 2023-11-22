@@ -81,6 +81,26 @@
 - ansible.builtin.debug:
     msg: "the value of foo.txt is {{lookup('ansible.builtin.file', 'cloud-init.yml') }}"
 
+- name: "Create LXD Container (proxy)"
+  # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
+  community.general.lxd_container:
+    name: proxy
+    type: container
+    state: started
+    ignore_volatile_options: true
+    wait_for_ipv4_addresses: true
+    profiles: ["default"]
+    source:
+      protocol: simplestreams
+      type: image
+      mode: pull
+      server: https://images.linuxcontainers.org
+      alias: ubuntu/jammy/cloud
+    # https://raw.githubusercontent.com/openwhisk-blog/openwhisk.blog/master/content/post/kubernetes/microk8s-init.yaml
+    config:
+       user.user-data: "{{ lookup('ansible.builtin.file', 'cloud-init.proxy.yml') }}"
+    timeout: 30
+
 - name: "Create LXD Container (microk8s)"
   # https://docs.ansible.com/ansible/latest/collections/community/general/lxd_container_module.html#parameter-source
   community.general.lxd_container:
@@ -97,6 +117,13 @@
       mode: pull
       server: https://images.linuxcontainers.org
       alias: ubuntu/jammy/cloud
+    # TODO: Add devices once a storage pool is configured
+#    devices:
+#      media:
+#        path: /data
+#        pool: media
+#        source: media
+#        type: disk
     # https://raw.githubusercontent.com/openwhisk-blog/openwhisk.blog/master/content/post/kubernetes/microk8s-init.yaml
     config:
        user.user-data: "{{ lookup('ansible.builtin.file', 'cloud-init.yml') }}"
