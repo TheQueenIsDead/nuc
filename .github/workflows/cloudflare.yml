@@ -1,6 +1,10 @@
 on:
   push:
+    paths:
+      - .github/workflows/cloudflare.yml
+      - docker/cloudflare.yml
     branches:
+      - main
       - 2024
 
 jobs:

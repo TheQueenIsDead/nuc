@@ -1,8 +1,11 @@
 on:
   push:
+    paths:
+      - .github/workflows/traefik.yml
+      - docker/traefik.yml
     branches:
+      - main
       - 2024
-
 jobs:
   traefik:
     runs-on: self-hosted
