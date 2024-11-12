@@ -1,0 +1,10 @@
+on:
+  push:
+    branches:
+      - 2024
+
+jobs:
+  traefik:
+    runs-on: self-hosted
+    steps:
+      - run: docker ps
