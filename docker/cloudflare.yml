@@ -1,0 +1,18 @@
+services:
+  cloudflared:
+    image: "cloudflare/cloudflared:latest"
+    container_name: "cloudflared"
+    hostname: "cloudflared"
+    restart: always
+
+    command:
+      - "tunnel"
+      - "--no-autoupdate"
+      - "run"
+      - "--token"
+      - "${CLOUDFLARE_TOKEN}"
+    secrets:
+      - cloudflare_token
+
+networks:
+  default:
