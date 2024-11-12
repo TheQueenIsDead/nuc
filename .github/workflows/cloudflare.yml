@@ -10,9 +10,11 @@ on:
 jobs:
   cloudflare:
     runs-on: self-hosted
+    env:
+      CLOUDFLARE_TOKEN: ${{ secrets.cloudflare_token }}
     steps:
       - run: docker ps
 
       - uses: actions/checkout@v4
 
-      - run: docker compose -f docker/cloudflare.yml up --wait -e CLOUDFLARE_TOKEN=${{ secrets.cloudflare_token }}
+      - run: docker compose -f docker/cloudflare.yml up --wait
