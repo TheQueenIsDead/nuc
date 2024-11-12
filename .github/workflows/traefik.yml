@@ -4,15 +4,11 @@ on:
       - 2024
 
 jobs:
-
   traefik:
-    defaults:
-      run:
-        working-directory: docker
     runs-on: self-hosted
     steps:
       - run: docker ps
 
       - uses: actions/checkout@v4
 
-      - run: docker compose up --wait -f traefik.yml
+      - run: docker compose up --wait -f docker/traefik.yml
