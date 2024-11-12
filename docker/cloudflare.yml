@@ -13,8 +13,6 @@ services:
       - "run"
       - "--token"
       - "${CLOUDFLARE_TOKEN}"
-    secrets:
-      - cloudflare_token
 
 networks:
   default:
