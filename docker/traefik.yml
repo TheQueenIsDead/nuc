@@ -19,7 +19,7 @@ services:
     labels:
       # https://stackoverflow.com/questions/61572512/expose-traefik-dashboard-to-subdomain
       - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`${TRAEFIK_FQDN}`)"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.tqid.dev`)"
       - "traefik.http.routers.dashboard.entrypoints=web"
     ports:
       - "80:80"
