@@ -1,25 +1,20 @@
-version: '3.8'
-
-# All services meant to be run on pi.local domain.
+version: "3.8"
 
 services:
-
-
   grafana:
-    image: grafana/grafana
-    container_name: grafana
-    hostname: grafana
-    restart: unless-stopped
-    environment:
-      - PUID=1000
-      - PGID=1000
+    image: "grafana/grafana"
+    restart: "always"
+    volumes:
+      - "grafana:/var/lib/grafana:rw"
     expose:
-      - 3000
+      - "3000"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.grafana.rule=Host(`${GRAFANA_FQDN}`)"
+      - "traefik.http.routers.grafana.rule=Host(`grafana.tqid.dev`)"
       - "traefik.http.routers.grafana.entrypoints=web"
-    volumes:
-      - grafana_volume:/var/lib/grafana:rw
-    networks:
-      - internal
+
+volumes:
+  grafana:
+
+networks:
+  default:

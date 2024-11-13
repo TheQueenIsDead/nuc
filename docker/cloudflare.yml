@@ -1,12 +1,9 @@
 version: "3.8"
 
 services:
-  cloudflared:
+  cloudflare:
     image: "cloudflare/cloudflared:latest"
-    container_name: "cloudflared"
-    hostname: "cloudflared"
-    restart: always
-
+    restart: "always"
     command:
       - "tunnel"
       - "--no-autoupdate"

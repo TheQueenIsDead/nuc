@@ -6,12 +6,10 @@ on:
     branches:
       - main
       - 2024
+
 jobs:
   traefik:
     runs-on: self-hosted
     steps:
-      - run: docker ps
-
       - uses: actions/checkout@v4
-
-      - run: docker compose -f docker/traefik.yml up --wait
+      - run: docker etc -f docker/traefik.yml up --wait

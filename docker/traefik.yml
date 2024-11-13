@@ -1,31 +1,24 @@
-version: '3.8'
-
-# All services meant to be run on pi.local domain.
+version: "3.8"
 
 services:
-
-  # https://traefik.io/
   traefik:
     image: "traefik:v2.6"
-    container_name: "traefik"
-    hostname: "traefik"
-    restart: always
+    restart: "always"
     command:
       - "--log.level=DEBUG"
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
-    labels:
-      # https://stackoverflow.com/questions/61572512/expose-traefik-dashboard-to-subdomain
-      - "traefik.enable=true"
-      - "traefik.http.routers.dashboard.rule=Host(`traefik.tqid.dev`)"
-      - "traefik.http.routers.dashboard.entrypoints=web"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
     ports:
       - "80:80"
       - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.rule=Host(`traefik.tqid.dev`)"
+      - "traefik.http.routers.dashboard.entrypoints=web"
 
 networks:
   default:
