@@ -1,0 +1,15 @@
+on:
+  push:
+    paths:
+      - .github/workflows/homer.yml
+      - docker/homer.yml
+    branches:
+      - main
+      - 2024
+
+jobs:
+  homer:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker etc -f docker/homer.yml up --wait
