@@ -1,0 +1,46 @@
+---
+- name: Get Cluster information
+  delegate_to: localhost
+  kubernetes.core.k8s_cluster_info:
+    kubeconfig: kubeconfig
+  register: api_status
+
+- name: Apply cloudflared manifest to the cluster.
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/cloudflared.yaml'
+    namespace: default
+
+- name: Create volumes on K8s
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/volumes.yaml'
+
+- name: Deploy prowlarr
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/prowlarr.yaml'
+- name: Deploy sonarr
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/sonarr.yaml'
+- name: Deploy radarr
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/radarr.yaml'
+- name: Deploy qbittorrent
+  delegate_to: localhost
+  kubernetes.core.k8s:
+    kubeconfig: kubeconfig
+    state: present
+    src: 'kubernetes/qbittorrent.yaml'

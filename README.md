@@ -87,7 +87,52 @@ https://github.com/librespeed/speedtest
 Potentially helpful for configuring internal domain access when moving to a publicly hosted domain:
 https://medium.com/@containeroo/using-pi-hole-to-route-your-services-internally-2ff495093718
 
-
 Cool guys making images:
 https://www.linuxserver.io/
 
+Information about libvirt
+https://ubuntu.com/server/docs/virtualization-libvirt
+
+Interesting exemplar showing how to install k0s with ansible
+https://docs.k0sproject.io/v0.13.1/examples/ansible-playbook/
+
+Cloudflared in Kubernetes
+https://developers.cloudflare.com/cloudflare-one/tutorials/many-cfd-one-tunnel/
+
+## Cloud Init
+
+Do it with ansible...
+https://cloudinit.readthedocs.io/en/latest/reference/modules.html#modules
+
+## LXD
+
+Documentation
+https://documentation.ubuntu.com/lxd/en/latest/
+
+Forwarding host ports to guest ports with LXD
+https://lxdware.com/forwarding-host-ports-to-lxd-instances/
+
+Bridge Networks
+https://documentation.ubuntu.com/lxd/en/latest/reference/network_bridge/#network-bridge
+
+Reverse Proxy:
+https://www.linode.com/docs/guides/beginners-guide-to-lxd-reverse-proxy/
+
+## MicroK8s
+
+Cluster
+https://microk8s.io/docs/clustering
+
+MicroK8s comparison to other platforms
+https://microk8s.io/compare
+
+Ports exposed on nodes
+https://microk8s.io/docs/services-and-ports
+
+Configuring via cloud init
+https://dev.to/sciabarracom/deploy-a-microk8s-cluster-with-cloud-init-45l7
+https://raw.githubusercontent.com/openwhisk-blog/openwhisk.blog/master/content/post/kubernetes/microk8s-init.yaml
+
+
+## Both!
+https://microk8s.io/docs/install-lxd

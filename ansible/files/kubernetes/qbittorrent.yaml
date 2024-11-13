@@ -1,0 +1,76 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: qbittorrent
+  namespace: default
+spec:
+  rules:
+  - host: "download.internal.local"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: qbittorrent
+            port:
+              name: web
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: qbittorrent
+  namespace: default
+spec:
+  ports:
+    - name: "web"
+      port: 8080
+      targetPort: 8080
+    - name: "api"
+      port: 6881
+      targetPort: 6881
+    - name: "api-udp"
+      port: 6881
+      targetPort: 6881
+      protocol: UDP
+  selector:
+    app: qbittorrent
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: default
+  labels:
+    app: qbittorrent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      containers:
+      - name: qbittorrent
+        image: lscr.io/linuxserver/qbittorrent:latest
+        env:
+          - name: WEBUI_PORT
+            value: "8080"
+        ports:
+        - containerPort: 8080
+        - containerPort: 6881
+        - containerPort: 6881
+          protocol: UDP
+        volumeMounts:
+          - name: config
+            mountPath: /config
+            subPath: qbittorrent
+          - name: downloads
+            mountPath: /downloads
+      volumes:
+        - name: config
+        - name: downloads
