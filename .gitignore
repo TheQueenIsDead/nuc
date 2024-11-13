@@ -1,3 +1,5 @@
+# Kubeconfig, pulled from the microk8s host.
+kubeconfig
 
 # Created by https://www.toptal.com/developers/gitignore/api/pycharm+all,terraform,ansible
 # Edit at https://www.toptal.com/developers/gitignore?templates=pycharm+all,terraform,ansible

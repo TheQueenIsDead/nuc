@@ -1,0 +1,5 @@
+---
+- name: "Install LXD"
+  community.general.snap:
+    state: present
+    name: lxd

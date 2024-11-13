@@ -1,52 +1,69 @@
 - name: "Home Infrastructure Setup"
 
-  hosts: rpi
+  hosts: nuc
 
   vars:
     pip_package: python3-pip
     compose_directory: "{{ playbook_dir }}/../compose"
     terraform_directory: "{{ playbook_dir }}/../terraform"
 
-  gather_facts: false
+#  gather_facts: false
 
   tasks:
-    - name: "Initialise config"
-      include_tasks:
-        file: ./tasks/config.yml
-        apply:
-          tags:
-            - config
-      tags:
-        - always
+    - name: "ping"
+      ping:
 
-    - name: "Configure ARM Host"
+    - name: "Configure Host"
       include_tasks:
-        file: ./tasks/raspberrypi.yml
+        file: ./tasks/host.yml
         apply:
           tags:
             - host
-            - pi
       tags:
         - always
 
-    - name: "Deploy docker-compose"
+    - name: "Provision Guest VMs"
       include_tasks:
-        file: ./tasks/compose.yml
+        file: ./tasks/vm.yml
         apply:
           tags:
-            - docker
-            - app
-            - compose
-      tags:
-        - always
-
-    - name: "Terraform internal DNS"
-      include_tasks:
-        file: ./tasks/terraform.yml
-        apply:
-          tags:
-            - terraform
-            - dns
+            - vm
+            - lxd
+            - minikube
             - pihole
       tags:
         - always
+
+    - name: "Kubernetes"
+      include_tasks:
+        file: ./tasks/kubernetes.yml
+        apply:
+          tags:
+            - k8s
+            - kubernetes
+      tags:
+        - always
+
+
+#    # NOTE: This was used on the PI to orchestrate workloads and networking
+#    - name: "Deploy docker-compose"
+#      include_tasks:
+#        file: ./tasks/compose.yml
+#        apply:
+#          tags:
+#            - docker
+#            - app
+#            - compose
+#      tags:
+#        - always
+#
+#    - name: "Terraform internal DNS"
+#      include_tasks:
+#        file: ./tasks/terraform.yml
+#        apply:
+#          tags:
+#            - terraform
+#            - dns
+#            - pihole
+#      tags:
+#        - always

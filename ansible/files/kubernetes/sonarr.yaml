@@ -1,0 +1,64 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sonarr
+  namespace: default
+spec:
+  rules:
+  - host: "sonarr.internal.local"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sonarr
+            port:
+              number: 8989
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sonarr
+  namespace: default
+spec:
+  ports:
+    - port: 8989
+      targetPort: 8989
+  selector:
+    app: sonarr
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: default
+  labels:
+    app: sonarr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+    spec:
+      containers:
+      - name: sonarr
+        image: lscr.io/linuxserver/sonarr:latest
+        ports:
+        - containerPort: 8989
+        volumeMounts:
+          - name: config
+            mountPath: /config
+            subPath: sonarr
+          - name: media
+            mountPath: /media
+          - name: downloads
+            mountPath: /downloads
+      volumes:
+        - name: config
+        - name: media
+        - name: downloads
