@@ -5,7 +5,7 @@ services:
     image: "b4bz/homer:latest"
     restart: "always"
     volumes:
-      - '/etc/homer.yml:/www/assets/config.yml'
+      - '../etc/homer.yml:/www/assets/config.yml'
     expose:
       - "8080"
     labels:
