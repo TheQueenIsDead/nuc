@@ -11,7 +11,7 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
     volumes:
-      - "/etc/prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "../etc/prometheus.yml:/etc/prometheus/prometheus.yml"
       - "prometheus:/prometheus"
     expose:
       - "9090"
