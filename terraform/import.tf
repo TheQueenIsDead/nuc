@@ -18,8 +18,8 @@ import {
   to = module.cloudflare.cloudflare_zero_trust_access_application.this["traefik"]
   id = "${var.cloudflare_account_id}/d4621624-2e46-4d60-af0e-76624ff085e2"
 }
-import {
-  to = module.cloudflare.cloudflare_zero_trust_tunnel_cloudflared_config.this
-  id = "${var.cloudflare_account_id}/f560b8a9-8e4d-4292-8c91-2a4636c3c21c"
-  # $ terraform import cloudflare_zero_trust_tunnel_cloudflared_config.example <account_id>/<tunnel_id>
-}
+# import {
+#   to = module.cloudflare.cloudflare_zero_trust_tunnel_cloudflared_config.this
+#   id = "${var.cloudflare_account_id}/f560b8a9-8e4d-4292-8c91-2a4636c3c21c"
+#   # $ terraform import cloudflare_zero_trust_tunnel_cloudflared_config.example <account_id>/<tunnel_id>
+# }
