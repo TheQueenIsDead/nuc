@@ -5,7 +5,6 @@ on:
       - docker/traefik.yml
     branches:
       - main
-      - 2024
 
 jobs:
   traefik:

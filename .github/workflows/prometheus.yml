@@ -6,7 +6,6 @@ on:
       - etc/prometheus.yml
     branches:
       - main
-      - 2024
 
 jobs:
   prometheus:

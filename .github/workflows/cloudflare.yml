@@ -5,7 +5,6 @@ on:
       - docker/cloudflare.yml
     branches:
       - main
-      - 2024
 
 jobs:
   cloudflare:
