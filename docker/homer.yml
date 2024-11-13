@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  homer:
+    image: "b4bz/homer:latest"
+    restart: "always"
+    volumes:
+      - '../etc/homer.yml:/www/assets/config.yml'
+    expose:
+      - "8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homer.rule=Host(`apps.tqid.dev`)"
+      - "traefik.http.routers.homer.entrypoints=web"
+
+networks:
+  default:

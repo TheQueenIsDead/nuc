@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  budge:
+    image: "thequeenisdead/budge:latest"
+    restart: "always"
+    volumes:
+      - "budge:/budge.bolt.db"
+    expose:
+      - "1337"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.homer.rule=Host(`budge.tqid.dev`)"
+      - "traefik.http.routers.homer.entrypoints=web"
+
+volumes:
+  budge:
+
+networks:
+  default:

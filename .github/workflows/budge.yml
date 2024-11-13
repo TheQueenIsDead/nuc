@@ -1,0 +1,15 @@
+on:
+  push:
+    paths:
+      - .github/workflows/budge.yml
+      - docker/budge.yml
+    branches:
+      - main
+      - 2024
+
+jobs:
+  budge:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/budge.yml up --wait

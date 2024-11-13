@@ -1,0 +1,17 @@
+on:
+  push:
+    paths:
+      - .github/workflows/cloudflare.yml
+      - docker/cloudflare.yml
+    branches:
+      - main
+      - 2024
+
+jobs:
+  cloudflare:
+    runs-on: self-hosted
+    env:
+      CLOUDFLARE_TOKEN: ${{ secrets.cloudflare_token }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/cloudflare.yml up --wait
