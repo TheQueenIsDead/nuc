@@ -3,6 +3,7 @@ on:
     paths:
       - .github/workflows/prometheus.yml
       - docker/prometheus.yml
+      - etc/prometheus.yml
     branches:
       - main
       - 2024

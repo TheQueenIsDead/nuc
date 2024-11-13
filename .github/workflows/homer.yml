@@ -3,6 +3,7 @@ on:
     paths:
       - .github/workflows/homer.yml
       - docker/homer.yml
+      - etc/homer.yml
     branches:
       - main
       - 2024
