@@ -17,7 +17,7 @@ resource "cloudflare_zero_trust_access_policy" "github" {
     github {
       identity_provider_id = data.cloudflare_zero_trust_access_identity_provider.github.id
       name = "TheQueenIsDead"
-      teams = []
+      teams = ["example"]
     }
   }
 }
