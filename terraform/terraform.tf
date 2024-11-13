@@ -1,16 +1,16 @@
 terraform {
   cloud {
     organization = "TheQueenIsDead"
-    hostname = "app.terraform.io"
+    hostname     = "app.terraform.io"
 
     workspaces {
       project = "nuc"
-      name = "nuc"
+      name    = "nuc"
     }
   }
   required_providers {
     cloudflare = {
-      source = "cloudflare/cloudflare"
+      source  = "cloudflare/cloudflare"
       version = "~> 4"
     }
   }

@@ -28,6 +28,7 @@ resource "cloudflare_zero_trust_access_application" "this" {
   type                      = "self_hosted"
   session_duration          = "24h"
   auto_redirect_to_identity = false
+  app_launcher_visible = true
   allowed_idps = [
     data.cloudflare_zero_trust_access_identity_provider.github.id
   ]
