@@ -13,11 +13,11 @@ resource "cloudflare_zero_trust_access_policy" "github" {
   decision   = "allow"
 
   include {
-#     email = ["test@example.com"]
+    email = ["test@example.com"]
     github {
       identity_provider_id = data.cloudflare_zero_trust_access_identity_provider.github.id
       name = "TheQueenIsDead"
-      teams = ["example"]
+      teams = []
     }
   }
 }
@@ -45,6 +45,7 @@ data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
   account_id = var.account_id
   name       = "nuc"
 }
+
 
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
   account_id = var.account_id
