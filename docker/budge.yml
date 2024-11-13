@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  homer:
+  budge:
     image: "thequeenisdead/budge:latest"
     restart: "always"
     volumes:
