@@ -1,5 +1,5 @@
 variable "subdomains" {
-  type = list(string)
+  type = set(string)
 }
 
 variable "zone_name" {
@@ -8,4 +8,8 @@ variable "zone_name" {
 
 variable "account_id" {
   type = string
+}
+
+variable "allowed_user_emails" {
+  type = set(string)
 }

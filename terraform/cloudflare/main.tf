@@ -13,12 +13,7 @@ resource "cloudflare_zero_trust_access_policy" "github" {
   decision   = "allow"
 
   include {
-    email = ["test@example.com"]
-    github {
-      identity_provider_id = data.cloudflare_zero_trust_access_identity_provider.github.id
-      name = "TheQueenIsDead"
-      teams = []
-    }
+    email_list = var.allowed_user_emails
   }
 }
 
