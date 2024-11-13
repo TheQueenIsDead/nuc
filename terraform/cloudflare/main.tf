@@ -44,7 +44,8 @@ data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
 
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
   account_id = var.account_id
-  tunnel_id  = data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id
+#   tunnel_id  = data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id
+  tunnel_id = "f560b8a9-8e4d-4292-8c91-2a4636c3c21c"
   config {
     origin_request {
       bastion_mode = false
