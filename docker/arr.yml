@@ -33,7 +33,7 @@ services:
       - ${MEDIA_FOLDER}:/media
       - ${DOWNLOADS_FOLDER}:/downloads
     expose:
-      - 8989:8989
+      - "8989"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.entrypoints=web"
@@ -70,7 +70,6 @@ services:
       - ${DOWNLOADS_FOLDER}:/downloads
     expose:
       - "8080"
-      - "6881"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.qbittorrent.entrypoints=web"
