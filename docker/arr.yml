@@ -16,6 +16,8 @@ services:
     expose:
       - "7878"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.entrypoints=web"
       - "traefik.http.routers.radarr.rule=Host(`radarr.tqid.dev`)"
 
   sonarr:
@@ -33,8 +35,9 @@ services:
     expose:
       - 8989:8989
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=web"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.tqid.dev`)"
-
 
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -49,8 +52,9 @@ services:
     expose:
       - "9696"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.entrypoints=web"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.tqid.dev`)"
-
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
@@ -68,6 +72,8 @@ services:
       - "8080"
       - "6881"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.qbittorrent.entrypoints=web"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.tqid.dev`)"
 
 networks:
