@@ -29,3 +29,9 @@ There's a few options for this.
 There was a valuable article on the plex forums regarding how to use Wasabi as a backend
 
  - https://forums.plex.tv/t/wasabi-s3-cloud-integration/237328/13
+
+```shell
+s3fs media-tqid-dev /home/tqid/media  -o url=https://s3.ap-southeast-2.wasabisys.com -o uid=1000,gid=1000 -o allow_other -o nonempty
+fusermount -u ./media
+```
+
