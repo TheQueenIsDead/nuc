@@ -61,7 +61,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
       for_each = var.subdomains
       content {
         hostname = "${ingress_rule.value}.${var.zone_name}"
-        service = "http://traefik:80"
+        service = ingress_rule.value == "traefik" ? "http://traefik:8080" : "http://traefik:80"
       }
     }
     ingress_rule {
