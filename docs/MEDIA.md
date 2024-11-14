@@ -18,8 +18,11 @@ There's a few options for this.
 
  - [S3 Drive](https://www.callback.com/s3drive)
  - [mountpoint-s3](https://github.com/awslabs/mountpoint-s3/)
- - [s3fs-fude](https://github.com/s3fs-fuse/s3fs-fuse)
+   - This only supports AWS S3: https://github.com/awslabs/mountpoint-s3/issues/850
+ - [s3fs-fuse](https://github.com/s3fs-fuse/s3fs-fuse)
+   - Trying this one
  - [sdfs](https://github.com/opendedup/sdfs)
+   - This has not been updated in 2 years
 
 ## Help
 
