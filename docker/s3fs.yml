@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   s3fs:
-    image: "efrecon/s3fs"
+    image: "efrecon/s3fs:1.94"
     restart: "always"
     cap_add:
       - "SYS_ADMIN"
