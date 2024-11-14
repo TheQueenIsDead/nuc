@@ -6,6 +6,10 @@ module "cloudflare" {
     "grafana",
     "prometheus",
     "traefik",
+    "prowlarr",
+    "sonarr",
+    "radarr",
+    "qbittorrent",
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id

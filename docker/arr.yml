@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: "unless-stopped"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+    volumes:
+      - ${CONFIG_FOLDER}/radarr:/config
+      - ${MEDIA_FOLDER}:/media
+      - ${DOWNLOADS_FOLDER}:/downloads
+    expose:
+      - "7878"
+    labels:
+      - "traefik.http.routers.radarr.rule=Host(`radarr.tqid.dev`)"
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    restart: "unless-stopped"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+    volumes:
+      - ${CONFIG_FOLDER}/sonarr:/config
+      - ${MEDIA_FOLDER}:/media
+      - ${DOWNLOADS_FOLDER}:/downloads
+    expose:
+      - 8989:8989
+    labels:
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.tqid.dev`)"
+
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: "unless-stopped"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+    volumes:
+      - ${CONFIG_FOLDER}/prowlarr:/config
+    expose:
+      - "9696"
+    labels:
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.tqid.dev`)"
+
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    restart: "unless-stopped"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Pacific/Auckland
+      - WEBUI_PORT=8080
+    volumes:
+      - ${CONFIG_FOLDER}/qbittorrent:/config
+      - ${DOWNLOADS_FOLDER}:/downloads
+    expose:
+      - "8080"
+      - "6881"
+    labels:
+      - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.tqid.dev`)"
+
+networks:
+  default:
