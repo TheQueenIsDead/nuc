@@ -13,7 +13,7 @@ resource "cloudflare_zero_trust_access_policy" "github" {
   decision   = "allow"
 
   include {
-    email_list = var.allowed_user_emails
+    email = var.allowed_user_emails
   }
 }
 
