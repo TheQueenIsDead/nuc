@@ -12,8 +12,8 @@ services:
       - "1337"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.homer.rule=Host(`budge.tqid.dev`)"
-      - "traefik.http.routers.homer.entrypoints=web"
+      - "traefik.http.routers.budge.rule=Host(`budge.tqid.dev`)"
+      - "traefik.http.routers.budge.entrypoints=web"
 
 volumes:
   budge:
