@@ -4,8 +4,10 @@ services:
   budge:
     image: "thequeenisdead/budge:latest"
     restart: "always"
+    environment:
+      BUDGE_BOLT_PATH: "/var/lib/budge"
     volumes:
-      - "budge:/budge.bolt.db"
+      - "budge:/var/lib/budge"
     expose:
       - "1337"
     labels:
