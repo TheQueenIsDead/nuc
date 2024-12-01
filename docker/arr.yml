@@ -84,7 +84,7 @@ services:
       - "PUID=1000"
       - "PGID=1000"
       - "TZ=Pacific/Auckland"
-#      - "JELLYFIN_PublishedServerUrl=http://jellyfin.tqid.dev" #optional
+      - "JELLYFIN_PublishedServerUrl=https://jellyfin.tqid.dev" #optional
     devices:
       - "/dev/dri:/dev/dri"
     volumes:
