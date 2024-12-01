@@ -84,13 +84,19 @@ services:
 #    network_mode: 'host'
     volumes:
       - "${CONFIG_FOLDER}/jellyfin:/config"
-      - "${CONFIG_FOLDER}/jellyfin:/config"
       - "${CONFIG_FOLDER}/jellyfin-cache:/cache"
       - type: bind
         source: ${MEDIA_FOLDER}
         target: /media
         read_only: true
-#    # Optional - alternative address used for autodiscovery
+    expose:
+      - "8096"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.entrypoints=web"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.tqid.dev`)"
+
+    #    # Optional - alternative address used for autodiscovery
 #    environment:
 #      - JELLYFIN_PublishedServerUrl=http://example.com
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
