@@ -10,9 +10,9 @@ jobs:
   arr:
     runs-on: self-hosted
     env:
-      CONFIG_FOLDER: "/home/tqid/media/config"
-      DOWNLOADS_FOLDER: "/home/tqid/media/downloads"
-      MEDIA_FOLDER: "/home/tqid/media/media"
+      CONFIG_FOLDER: "/mnt/orico/config"
+      DOWNLOADS_FOLDER: "/mnt/orico/downloads"
+      MEDIA_FOLDER: "/mnt/orico/media"
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/arr.yml up --wait
