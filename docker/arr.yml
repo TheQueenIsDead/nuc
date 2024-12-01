@@ -56,22 +56,6 @@ services:
       - "traefik.http.routers.prowlarr.entrypoints=web"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.tqid.dev`)"
 
-  notifiarr:
-    container_name: "notifiarr"
-    hostname: "notifiarr"
-    image: "golift/notifiarr"
-    restart: "unless-stopped"
-    volumes:
-      - "${CONFIG_FOLDER}/notifiarr:/config"
-      - "/var/run/utmp:/var/run/utmp"
-      - "/etc/machine-id:/etc/machine-id"
-    expose:
-      - "5454"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.notifiarr.entrypoints=web"
-      - "traefik.http.routers.notifiarr.rule=Host(`notifiarr.tqid.dev`)"
-
   qbittorrent:
     image: "lscr.io/linuxserver/qbittorrent:latest"
     container_name: "qbittorrent"
