@@ -84,24 +84,23 @@ services:
       - "PUID=1000"
       - "PGID=1000"
       - "TZ=Pacific/Auckland"
-#      - "JELLYFIN_PublishedServerUrl=https://jellyfin.tqid.dev" #optional
-#    devices:
-#      - "/dev/dri:/dev/dri"
-#    volumes:
-#      - "${CONFIG_FOLDER}/jellyfin:/config"
-#      - "${MEDIA_FOLDER}:/data/movies"
+      - "JELLYFIN_PublishedServerUrl=https://jellyfin.tqid.dev" #optional
+    devices:
+      - "/dev/dri:/dev/dri"
+    volumes:
+      - "${CONFIG_FOLDER}/jellyfin:/config"
+      - "${MEDIA_FOLDER}:/data/movies"
 #    ports:
 #      - 8096:8096
 #      - 8920:8920 #optional
 #      - 7359:7359/udp #optional
 #      - 1900:1900/udp #optional
-#    expose:
-#      - "8096"
+    expose:
+      - "8096"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.entrypoints=web"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.tqid.dev`)"
-      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
 
 networks:
   default:
