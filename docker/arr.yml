@@ -83,11 +83,13 @@ services:
     environment:
       - "PUID=1000"
       - "PGID=1000"
-      - "TZ=Etc/UTC"
-      - "JELLYFIN_PublishedServerUrl=http://jellyfin.tqid.dev" #optional
+      - "TZ=Pacific/Auckland"
+#      - "JELLYFIN_PublishedServerUrl=http://jellyfin.tqid.dev" #optional
+    devices:
+      - "/dev/dri:/dev/dri"
     volumes:
       - "${CONFIG_FOLDER}/jellyfin:/config"
-      - "${MEDIA_FOLDER}:/data/media"
+      - "${MEDIA_FOLDER}:/data/movies"
 #    ports:
 #      - 8096:8096
 #      - 8920:8920 #optional
