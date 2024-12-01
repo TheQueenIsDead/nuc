@@ -74,6 +74,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.qbittorrent.entrypoints=web"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.tqid.dev`)"
+      - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
 
 networks:
   default:
