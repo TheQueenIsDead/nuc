@@ -10,6 +10,7 @@ module "cloudflare" {
     "sonarr",
     "radarr",
     "qbittorrent",
+    "jellyfin"
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id
