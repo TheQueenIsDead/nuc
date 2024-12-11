@@ -12,6 +12,7 @@ services:
     volumes:
       - "${CONFIG_FOLDER}/radarr:/config"
       - "${MEDIA_FOLDER}:/media"
+      - "${MOVIES_FOLDER}:/movies"
       - "${DOWNLOADS_FOLDER}:/downloads"
     expose:
       - "7878"
@@ -31,6 +32,7 @@ services:
     volumes:
       - "${CONFIG_FOLDER}/sonarr:/config"
       - "${MEDIA_FOLDER}:/media"
+      - "${TV_FOLDER}:/tv"
       - "${DOWNLOADS_FOLDER}:/downloads"
     expose:
       - "8989"
@@ -89,7 +91,9 @@ services:
       - "/dev/dri:/dev/dri"
     volumes:
       - "${CONFIG_FOLDER}/jellyfin:/config"
-      - "${MEDIA_FOLDER}:/data/movies"
+      - "${MEDIA_FOLDER}:/data/media"
+      - "${MOVIES_FOLDER}:/data/movies"
+      - "${TV_FOLDER}:/data/tv"
 #    ports:
 #      - 8096:8096
 #      - 8920:8920 #optional

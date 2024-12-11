@@ -13,6 +13,8 @@ jobs:
       CONFIG_FOLDER: "/mnt/orico/config"
       DOWNLOADS_FOLDER: "/mnt/orico/downloads"
       MEDIA_FOLDER: "/mnt/orico/media"
+      MOVIES_FOLDER: "/mnt/orico/movies"
+      TV_FOLDER: "/mnt/orico/tv"
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/arr.yml up --wait
