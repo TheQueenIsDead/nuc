@@ -11,7 +11,6 @@ services:
       - "TZ=Pacific/Auckland"
     volumes:
       - "${CONFIG_FOLDER}/radarr:/config"
-      - "${MEDIA_FOLDER}:/media"
       - "${MOVIES_FOLDER}:/movies"
       - "${DOWNLOADS_FOLDER}:/downloads"
     expose:
@@ -31,7 +30,6 @@ services:
       - "TZ=Pacific/Auckland"
     volumes:
       - "${CONFIG_FOLDER}/sonarr:/config"
-      - "${MEDIA_FOLDER}:/media"
       - "${TV_FOLDER}:/tv"
       - "${DOWNLOADS_FOLDER}:/downloads"
     expose:
@@ -91,7 +89,6 @@ services:
       - "/dev/dri:/dev/dri"
     volumes:
       - "${CONFIG_FOLDER}/jellyfin:/config"
-      - "${MEDIA_FOLDER}:/data/media"
       - "${MOVIES_FOLDER}:/data/movies"
       - "${TV_FOLDER}:/data/tv"
 #    ports:
