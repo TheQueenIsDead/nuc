@@ -1,5 +1,8 @@
 variable "subdomains" {
-  type = set(string)
+  type = set(object({
+    name = string
+    public = optional(bool, false)
+  }))
 }
 
 variable "zone_name" {

@@ -1,16 +1,16 @@
 module "cloudflare" {
   source = "./cloudflare"
   subdomains = [
-    "apps",
-    "budge",
-    "grafana",
-    "prometheus",
-    "traefik",
-    "prowlarr",
-    "sonarr",
-    "radarr",
-    "qbittorrent",
-    "jellyfin"
+    { name = "apps" },
+    { name = "budge" },
+    { name = "grafana" },
+    { name = "prometheus" },
+    { name = "traefik" },
+    { name = "prowlarr" },
+    { name = "sonarr" },
+    { name = "radarr" },
+    { name = "qbittorrent" },
+    { name = "jellyfin", public = true },
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id

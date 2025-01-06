@@ -17,14 +17,24 @@ resource "cloudflare_zero_trust_access_policy" "github" {
   }
 }
 
+resource "cloudflare_zero_trust_access_policy" "public" {
+  account_id = var.account_id
+  name       = "Bypass Public"
+  decision   = "bypass"
+
+  include {
+    everyone = true
+  }
+}
+
 
 resource "cloudflare_zero_trust_access_application" "this" {
 
-  for_each = toset(var.subdomains)
+  for_each = { for k, v in var.subdomains: v.name => v}
 
   zone_id                   = data.cloudflare_zone.this.id
   name                      = each.key
-  domain                    = "${each.key}.${data.cloudflare_zone.this.name}"
+  domain                    = "${each.value.name}.${data.cloudflare_zone.this.name}"
   type                      = "self_hosted"
   session_duration          = "24h"
   auto_redirect_to_identity = false
@@ -32,7 +42,9 @@ resource "cloudflare_zero_trust_access_application" "this" {
   allowed_idps = [
     data.cloudflare_zero_trust_access_identity_provider.github.id
   ]
-  policies = [
+  policies = each.value.public ? [
+    cloudflare_zero_trust_access_policy.public.id
+  ] : [
     cloudflare_zero_trust_access_policy.github.id
   ]
 }
@@ -41,7 +53,6 @@ data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
   account_id = var.account_id
   name       = "nuc"
 }
-
 
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
   account_id = var.account_id
@@ -58,10 +69,10 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
       proxy_port = 0
     }
     dynamic "ingress_rule" {
-      for_each = var.subdomains
+      for_each = { for k, v in var.subdomains: v.name => v}
       content {
-        hostname = "${ingress_rule.value}.${var.zone_name}"
-        service = ingress_rule.value == "traefik" ? "http://traefik:8080" : "http://traefik:80"
+        hostname = "${ingress_rule.value.name}.${var.zone_name}"
+        service = ingress_rule.value.name == "traefik" ? "http://traefik:8080" : "http://traefik:80"
       }
     }
     ingress_rule {
