@@ -34,7 +34,7 @@ resource "cloudflare_zero_trust_access_application" "this" {
 
   zone_id                   = data.cloudflare_zone.this.id
   name                      = each.key
-  domain                    = "${each.key}.${data.cloudflare_zone.this.name}"
+  domain                    = "${each.value.name}.${data.cloudflare_zone.this.name}"
   type                      = "self_hosted"
   session_duration          = "24h"
   auto_redirect_to_identity = false
@@ -42,7 +42,9 @@ resource "cloudflare_zero_trust_access_application" "this" {
   allowed_idps = [
     data.cloudflare_zero_trust_access_identity_provider.github.id
   ]
-  policies = each.value.public ? [ cloudflare_zero_trust_access_policy.public ] : [
+  policies = each.value.public ? [
+    cloudflare_zero_trust_access_policy.public.id
+  ] : [
     cloudflare_zero_trust_access_policy.github.id
   ]
 }
@@ -69,8 +71,8 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
     dynamic "ingress_rule" {
       for_each = var.subdomains
       content {
-        hostname = "${ingress_rule.value}.${var.zone_name}"
-        service = ingress_rule.value == "traefik" ? "http://traefik:8080" : "http://traefik:80"
+        hostname = "${ingress_rule.value.name}.${var.zone_name}"
+        service = ingress_rule.value.name == "traefik" ? "http://traefik:8080" : "http://traefik:80"
       }
     }
     ingress_rule {
