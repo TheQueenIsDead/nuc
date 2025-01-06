@@ -30,7 +30,7 @@ resource "cloudflare_zero_trust_access_policy" "public" {
 
 resource "cloudflare_zero_trust_access_application" "this" {
 
-  for_each = var.subdomains
+  for_each = { for k, v in var.subdomains: v.name => v}
 
   zone_id                   = data.cloudflare_zone.this.id
   name                      = each.key
@@ -69,7 +69,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
       proxy_port = 0
     }
     dynamic "ingress_rule" {
-      for_each = var.subdomains
+      for_each = { for k, v in var.subdomains: v.name => v}
       content {
         hostname = "${ingress_rule.value.name}.${var.zone_name}"
         service = ingress_rule.value.name == "traefik" ? "http://traefik:8080" : "http://traefik:80"
