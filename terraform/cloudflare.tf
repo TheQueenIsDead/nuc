@@ -11,6 +11,7 @@ module "cloudflare" {
     { name = "radarr" },
     { name = "qbittorrent" },
     { name = "jellyfin", public = true },
+    { name = "requestrr"},
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id
