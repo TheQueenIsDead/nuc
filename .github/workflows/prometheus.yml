@@ -1,4 +1,7 @@
+name: "Prometheus"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/prometheus.yml

@@ -1,4 +1,7 @@
+name: "Node Exporter"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/node.yml

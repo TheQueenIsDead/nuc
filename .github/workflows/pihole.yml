@@ -1,4 +1,7 @@
+name: "Pihole"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/pihole.yml

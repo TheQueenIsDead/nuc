@@ -1,4 +1,7 @@
+name: "Traefik"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/traefik.yml

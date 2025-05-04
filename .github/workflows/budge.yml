@@ -1,4 +1,7 @@
+name: "Budge"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/budge.yml

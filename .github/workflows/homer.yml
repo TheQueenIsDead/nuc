@@ -1,4 +1,7 @@
+name: "Homer"
+
 on:
+  workflow_dispatch:
   push:
     paths:
       - .github/workflows/homer.yml
