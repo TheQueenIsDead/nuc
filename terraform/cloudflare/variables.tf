@@ -1,6 +1,6 @@
 variable "subdomains" {
   type = set(object({
-    name = string
+    name   = string
     public = optional(bool, false)
   }))
 }
