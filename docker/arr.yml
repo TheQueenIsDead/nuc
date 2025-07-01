@@ -57,7 +57,7 @@ services:
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.tqid.dev`)"
 
   qbittorrent:
-    image: "lscr.io/linuxserver/qbittorrent:latest"
+    image: "lscr.io/linuxserver/qbittorrent:5.0.5"
     container_name: "qbittorrent"
     restart: "unless-stopped"
     environment:
