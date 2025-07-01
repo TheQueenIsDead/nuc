@@ -11,13 +11,17 @@ services:
       - "TZ=Pacific/Auckland"
 #      - PASSWORD="PASSWORD"
     volumes:
-      - "${CONFIG_FOLDER}/librespeed:/config"
+      - "librespeed:/config"
     expose:
       - "80"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.speed.rule=Host(`speed.tqid.dev`)"
       - "traefik.http.routers.speed.entrypoints=web"
+
+
+volumes:
+  librespeed:
 
 networks:
   default:
