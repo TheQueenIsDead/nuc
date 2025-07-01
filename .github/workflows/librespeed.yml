@@ -1,0 +1,17 @@
+name: "Librespeed"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - librespeed.yml
+      - ../../docker/librespeed.yml
+    branches:
+      - main
+
+jobs:
+  librespeed:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/librespeed.yml up --wait

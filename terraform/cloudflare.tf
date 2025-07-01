@@ -4,14 +4,15 @@ module "cloudflare" {
     { name = "apps" },
     { name = "budge" },
     { name = "grafana" },
-    { name = "prometheus" },
-    { name = "traefik" },
-    { name = "prowlarr" },
-    { name = "sonarr" },
-    { name = "radarr" },
-    { name = "qbittorrent" },
     { name = "jellyfin", public = true },
+    { name = "prometheus" },
+    { name = "prowlarr" },
+    { name = "qbittorrent" },
+    { name = "radarr" },
     { name = "requestrr"},
+    { name = "sonarr" },
+    { name = "speed", public = true },
+    { name = "traefik" },
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id
