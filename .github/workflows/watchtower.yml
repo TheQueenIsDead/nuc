@@ -1,0 +1,17 @@
+name: "Watchtower"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/watchtower.yml
+      - docker/watchtower.yml
+    branches:
+      - main
+
+jobs:
+  watchtower:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/watchtower.yml up --wait
