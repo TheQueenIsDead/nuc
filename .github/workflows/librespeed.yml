@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - librespeed.yml
-      - ../../docker/librespeed.yml
+      - .github/workflows/librespeed.yml
+      - docker/librespeed.yml
     branches:
       - main
 
