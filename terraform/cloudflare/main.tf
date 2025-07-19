@@ -54,7 +54,7 @@ data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
   name       = "nuc"
 }
 
-resource "cloudflare_dns_record" "http_app" {
+resource "cloudflare_record" "http_app" {
   for_each = { for k, v in var.subdomains : v.name => v }
   zone_id = data.cloudflare_zone.this.id
   name    = each.value.name
