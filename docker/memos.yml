@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  grafana:
+  memos:
     image: "neosmemo/memos:stable"
     container_name: "memos"
     restart: "always"
