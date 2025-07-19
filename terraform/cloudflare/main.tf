@@ -54,6 +54,16 @@ data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
   name       = "nuc"
 }
 
+resource "cloudflare_dns_record" "http_app" {
+  for_each = { for k, v in var.subdomains : v.name => v }
+  zone_id = data.cloudflare_zone.this.id
+  name    = each.value.name
+  content = "${data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id}.cfargotunnel.com"
+  type    = "CNAME"
+  ttl     = 1
+  proxied = true
+}
+
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
   account_id = var.account_id
   #   tunnel_id  = data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id
