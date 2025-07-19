@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  grafana:
+    image: "neosmemo/memos:stable"
+    container_name: "memos"
+    restart: "always"
+    volumes:
+      - "grafana:/var/lib/grafana:rw"
+      - "memos:/var/opt/memos"
+    expose:
+      - "5230"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.memos.rule=Host(`memos.tqid.dev`)"
+      - "traefik.http.routers.memos.entrypoints=web"
+
+volumes:
+  memos:
+
+networks:
+  default:

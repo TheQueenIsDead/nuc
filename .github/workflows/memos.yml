@@ -1,0 +1,17 @@
+name: "Memos"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/memos.yml
+      - docker/memos.yml
+    branches:
+      - main
+
+jobs:
+  memos:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/memos.yml up --wait
