@@ -6,7 +6,6 @@ services:
     container_name: "memos"
     restart: "always"
     volumes:
-      - "grafana:/var/lib/grafana:rw"
       - "memos:/var/opt/memos"
     expose:
       - "5230"
