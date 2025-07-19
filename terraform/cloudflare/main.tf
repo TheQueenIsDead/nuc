@@ -58,7 +58,10 @@ resource "cloudflare_record" "http_app" {
   for_each = { for k, v in var.subdomains : v.name => v }
   zone_id = data.cloudflare_zone.this.id
   name    = each.value.name
-  content = "${data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id}.cfargotunnel.com"
+  # content = "${data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id}.cfargotunnel.com"
+  content = "f560b8a9-8e4d-4292-8c91-2a4636c3c21c.cfargotunnel.com"
+  # "f560b8a9-8e4d-4292-8c91-2a4636c3c21c.cfargotunnel.com" # Working CNAME
+  # "e8ac3e02-ae53-4d98-9644-cfe379deb464.cfargotunnel.com" # Data tunnel
   type    = "CNAME"
   ttl     = 1
   proxied = true
