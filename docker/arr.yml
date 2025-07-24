@@ -121,40 +121,44 @@ services:
       - "traefik.http.routers.requestrr.rule=Host(`requestrr.tqid.dev`)"
 
   tdarr:
-    container_name: tdarr
-    image: ghcr.io/haveagitgat/tdarr:latest
-    restart: unless-stopped
-    network_mode: bridge
-    ports:
-      - 8265:8265 # webUI port
-      - 8266:8266 # server port
+    image: "ghcr.io/haveagitgat/tdarr:latest"
+    container_name: "tdarr"
+    restart: "unless-stopped"
+    expose:
+      - "8265" # webUI port
+      - "8266" # server port
     environment:
-      - TZ=Europe/London
-      - PUID=${PUID}
-      - PGID=${PGID}
-      - UMASK_SET=002
-      - serverIP=0.0.0.0
-      - serverPort=8266
-      - webUIPort=8265
-      - internalNode=true
-      - inContainer=true
-      - ffmpegVersion=7
-      - nodeName=MyInternalNode
-      - auth=false
-      - openBrowser=true
-      - maxLogSizeMB=10
-      - cronPluginUpdate=
-      - NVIDIA_DRIVER_CAPABILITIES=all
-      - NVIDIA_VISIBLE_DEVICES=all
+      - "TZ=Pacific/Auckland"
+      - "PUID=1000"
+      - "PGID=1000"
+      - "UMASK_SET=002"
+      - "serverIP=0.0.0.0"
+      - "serverPort=8266"
+      - "webUIPort=8265"
+      - "internalNode=true"
+      - "inContainer=true"
+      - "ffmpegVersion=7"
+      - "nodeName=MyInternalNode"
+      - "auth=false"
+      - "openBrowser=true"
+      - "maxLogSizeMB=10"
+      - "cronPluginUpdate="
+      - "NVIDIA_DRIVER_CAPABILITIES=all"
+      - "NVIDIA_VISIBLE_DEVICES=all"
     volumes:
-      - /docker/tdarr/server:/app/server
-      - /docker/tdarr/configs:/app/configs
-      - /docker/tdarr/logs:/app/logs
-      - /media:/media
-      - /transcode_cache:/temp
-
+      - "${CONFIG_FOLDER}/tdarr/server:/app/server"
+      - "${CONFIG_FOLDER}/tdarr/configs:/app/configs"
+      - "${CONFIG_FOLDER}/tdarr/logs:/app/logs"
+      - "${CONFIG_FOLDER}/tdarr/cache:/temp" # TODO: Check this gets cleared out after the fact
+      - "${MOVIES_FOLDER}:/media/movies"
+      - "${TV_FOLDER}:/media/tv"
     devices:
       - /dev/dri:/dev/dri
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tdarr.entrypoints=web"
+      - "traefik.http.routers.tdarr.rule=Host(`tdarr.tqid.dev`)"
+
 
 networks:
   default:

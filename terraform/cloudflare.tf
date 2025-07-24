@@ -13,6 +13,7 @@ module "cloudflare" {
     { name = "requestrr"},
     { name = "sonarr" },
     { name = "speed", public = true },
+    { name = "tdarr" },
     { name = "traefik" },
   ]
   zone_name           = "tqid.dev"
