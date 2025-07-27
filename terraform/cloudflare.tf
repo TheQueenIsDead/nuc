@@ -15,7 +15,6 @@ module "cloudflare" {
     { name = "speed", public = true },
     { name = "tdarr" },
     { name = "traefik" },
-    { name = "umanic" },
   ]
   zone_name           = "tqid.dev"
   account_id          = var.cloudflare_account_id
