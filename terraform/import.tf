@@ -27,51 +27,51 @@ import {
 
 import {
   to = module.cloudflare.cloudflare_record.http_app["apps"]
-  id = "${var.cloudflare_account_id}/2ea30cb4248d1432d3c423d64ade47a7"
+  id = "97256247dc091f4da324546f854354cd/2ea30cb4248d1432d3c423d64ade47a7"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["budge"]
-  id = "${var.cloudflare_account_id}/8526a6f91b78511d40abb34fc19039ee"
+  id = "97256247dc091f4da324546f854354cd/8526a6f91b78511d40abb34fc19039ee"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["grafana"]
-  id = "${var.cloudflare_account_id}/e344a42613b8a10819c9eacbec5e9457"
+  id = "97256247dc091f4da324546f854354cd/e344a42613b8a10819c9eacbec5e9457"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["jellyfin"]
-  id = "${var.cloudflare_account_id}/91bb85395cd180c36f037f19fa0011a8"
+  id = "97256247dc091f4da324546f854354cd/91bb85395cd180c36f037f19fa0011a8"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["prometheus"]
-  id = "${var.cloudflare_account_id}/fe05d756b8e1ed4d1546b72666da98be"
+  id = "97256247dc091f4da324546f854354cd/fe05d756b8e1ed4d1546b72666da98be"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["prowlarr"]
-  id = "${var.cloudflare_account_id}/bc76cf0ffa21a1c246e54ddb0cb6dc0e"
+  id = "97256247dc091f4da324546f854354cd/bc76cf0ffa21a1c246e54ddb0cb6dc0e"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["qbittorrent"]
-  id = "${var.cloudflare_account_id}/51173ce1906589ed931013925d49887d"
+  id = "97256247dc091f4da324546f854354cd/51173ce1906589ed931013925d49887d"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["radarr"]
-  id = "${var.cloudflare_account_id}/0b12400c456d94e440bd538d341a531d"
+  id = "97256247dc091f4da324546f854354cd/0b12400c456d94e440bd538d341a531d"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["requestrr"]
-  id = "${var.cloudflare_account_id}/ab98a339691087705d4fe33d6a605619"
+  id = "97256247dc091f4da324546f854354cd/ab98a339691087705d4fe33d6a605619"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["sonarr"]
-  id = "${var.cloudflare_account_id}/bdbcb6f03f7fddd6caa97ec6b8fc7b78"
+  id = "97256247dc091f4da324546f854354cd/bdbcb6f03f7fddd6caa97ec6b8fc7b78"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["speed"]
-  id = "${var.cloudflare_account_id}/04d9d86143eae79831fb707e92d83309"
+  id = "97256247dc091f4da324546f854354cd/04d9d86143eae79831fb707e92d83309"
 }
 import {
   to = module.cloudflare.cloudflare_record.http_app["traefik"]
-  id = "${var.cloudflare_account_id}/67ee8bb31d7cd807840fd0da5f489998"
+  id = "97256247dc091f4da324546f854354cd/67ee8bb31d7cd807840fd0da5f489998"
 }
 
 
