@@ -5,6 +5,7 @@ module "cloudflare" {
     { name = "budge" },
     { name = "grafana" },
     { name = "jellyfin", public = true },
+    { name = "jellyseer" },
     { name = "memos" },
     { name = "prometheus" },
     { name = "prowlarr" },
