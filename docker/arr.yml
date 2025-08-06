@@ -91,10 +91,10 @@ services:
       - "${CONFIG_FOLDER}/jellyfin:/config"
       - "${MOVIES_FOLDER}:/data/movies"
       - "${TV_FOLDER}:/data/tv"
-#    ports:
-#      - 8096:8096
+    ports:
+      - "8096:8096" # Local HTTP
 #      - 8920:8920 #optional
-#      - 7359:7359/udp #optional
+      - "7359:7359/udp" # Local service discovery
 #      - 1900:1900/udp #optional
     expose:
       - "8096"
@@ -102,6 +102,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyfin.entrypoints=web"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.tqid.dev`)"
+      - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+
 
   requestrr:
     image: "thomst08/requestrr"
