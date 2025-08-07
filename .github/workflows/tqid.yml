@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  budge:
+  tqid:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
