@@ -1,11 +1,11 @@
-name: "Budge"
+name: "TQID"
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - .github/workflows/budge.yml
-      - docker/budge.yml
+      - tqid.yml
+      - ../../docker/tqid.yml
     branches:
       - main
 
@@ -14,4 +14,4 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - run: docker compose -f docker/budge.yml up --wait
+      - run: docker compose -f docker/tqid.yml up --wait

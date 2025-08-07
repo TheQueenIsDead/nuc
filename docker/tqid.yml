@@ -15,6 +15,16 @@ services:
       - "traefik.http.routers.budge.rule=Host(`budge.tqid.dev`)"
       - "traefik.http.routers.budge.entrypoints=web"
 
+  chat:
+    image: "thequeenisdead/go-chat:latest"
+    restart: "always"
+    expose:
+      - "8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chat.rule=Host(`chat.tqid.dev`)"
+      - "traefik.http.routers.chat.entrypoints=web"
+
 volumes:
   budge:
 

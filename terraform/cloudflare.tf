@@ -3,6 +3,7 @@ module "cloudflare" {
   subdomains = [
     { name = "apps" },
     { name = "budge" },
+    { name = "chat", public = true },
     { name = "grafana" },
     { name = "jellyfin", public = true },
     { name = "jellyseer" },
