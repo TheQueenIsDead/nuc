@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - tqid.yml
-      - ../../docker/tqid.yml
+      - .github/workflows/tqid.yml
+      - docker/tqid.yml
     branches:
       - main
 
