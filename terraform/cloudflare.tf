@@ -12,6 +12,7 @@ module "cloudflare" {
     { name = "prowlarr" },
     { name = "qbittorrent" },
     { name = "radarr" },
+    { name = "recipes"},
     { name = "requestrr"},
     { name = "sonarr" },
     { name = "speed", public = true },

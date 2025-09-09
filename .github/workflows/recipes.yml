@@ -1,0 +1,20 @@
+name: "Recipes"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/recipes.yml
+      - docker/recipes.yml
+    branches:
+      - main
+
+jobs:
+  recipes:
+    runs-on: self-hosted
+    env:
+      RECIPES_SECRET_KEY: ${{ secrets.recipes_secret_key }}
+      RECIPES_POSTGRES_PASSWORD: ${{ secrets.recipes_postgres_password }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/recipes.yml up --wait
