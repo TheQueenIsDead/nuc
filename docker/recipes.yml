@@ -20,7 +20,7 @@ services:
     environment:
       - "TZ=Pacific/Auckland"
       - "SECRET_KEY=${RECIPES_SECRET_KEY}"
-      - "ALLOWED_HOSTS=recipes.tqid.dev"
+      - "ALLOWED_HOSTS=*"
       - "CSRF_TRUSTED_ORIGINS=https://recipes.tqid.dev"
       - "DB_ENGINE=django.db.backends.postgresql"
       - "POSTGRES_HOST=recipes-db"
