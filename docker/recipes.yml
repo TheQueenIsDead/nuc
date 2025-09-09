@@ -37,6 +37,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.recipes.rule=Host(`recipes.tqid.dev`)"
       - "traefik.http.routers.recipes.entrypoints=web"
+      - "traefik.http.middlewares.recipes.headers.customrequestheaders.X-Forwarded-Proto=https"
+
 
 networks:
   default:
