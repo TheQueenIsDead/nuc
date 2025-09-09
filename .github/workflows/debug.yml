@@ -1,0 +1,13 @@
+name: "Debug"
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  arr:
+    runs-on: self-hosted
+    steps:
+      - run: docker ps
