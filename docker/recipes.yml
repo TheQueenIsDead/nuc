@@ -1,50 +1,25 @@
 services:
-  recipes-db:
+  mealie:
+    image: "ghcr.io/mealie-recipes/mealie:v3.1.2"
+    container_name: "mealie"
     restart: "always"
-    image: "postgres:16-alpine"
     environment:
-      - "TZ=Pacific/Auckland"
-      - "SECRET_KEY=${RECIPES_SECRET_KEY}"
-      - "DB_ENGINE=django.db.backends.postgresql"
-      - "POSTGRES_HOST=recipes-db"
-      - "POSTGRES_DB=djangodb"
-      - "POSTGRES_PORT=5432"
-      - "POSTGRES_USER=djangouser"
-      - "POSTGRES_PASSWORD=${RECIPES_POSTGRES_PASSWORD}"
+      ALLOW_SIGNUP: "false"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Pacific/Auckland"
+      BASE_URL: "https://recipes.tqid.dev"
     volumes:
-      - "recipes-postgres:/var/lib/postgresql/data"
-
-  recipes:
-    restart: "always"
-    image: "vabene1111/recipes"
-    environment:
-      - "TZ=Pacific/Auckland"
-      - "SECRET_KEY=${RECIPES_SECRET_KEY}"
-      - "ALLOWED_HOSTS=*"
-      - "CSRF_TRUSTED_ORIGINS=https://recipes.tqid.dev"
-      - "DB_ENGINE=django.db.backends.postgresql"
-      - "POSTGRES_HOST=recipes-db"
-      - "POSTGRES_DB=djangodb"
-      - "POSTGRES_PORT=5432"
-      - "POSTGRES_USER=djangouser"
-      - "POSTGRES_PASSWORD=${RECIPES_POSTGRES_PASSWORD}"
-    volumes:
-      - "recipes-static:/opt/recipes/staticfiles"
-      - "recipes-media:/opt/recipes/mediafiles"
-    depends_on:
-      - "recipes-db"
+      - "mealie-data:/app/data/"
+    expose:
+      - "9000"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.recipes.rule=Host(`recipes.tqid.dev`)"
       - "traefik.http.routers.recipes.entrypoints=web"
-      - "traefik.http.middlewares.recipes-headers.headers.customrequestheaders.X-Forwarded-Proto=https"
-      - "traefik.http.middlewares.recipes-headers.headers.customrequestheaders.X-Forwarded-Host=recipes.tqid.dev"
-      - "traefik.http.routers.recipes.middlewares=recipes-headers"
+
+volumes:
+  mealie-data:
 
 networks:
   default:
-
-volumes:
-  recipes-postgres:
-  recipes-static:
-  recipes-media:
