@@ -8,6 +8,7 @@ module "cloudflare" {
     { name = "jellyfin", public = true },
     { name = "jellyseer" },
     { name = "memos" },
+    { name = "photos", public = true },
     { name = "prometheus" },
     { name = "prowlarr" },
     { name = "qbittorrent" },

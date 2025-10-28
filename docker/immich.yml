@@ -15,8 +15,12 @@ services:
     volumes:
       - ${UPLOAD_FOLDER}:/data
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - '2283:2283'
+    expose:
+      - '2283'
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.memos.rule=Host(`photos.tqid.dev`)"
+      - "traefik.http.routers.memos.entrypoints=web"
     depends_on:
       - redis
       - database
@@ -63,3 +67,6 @@ services:
 
 volumes:
   model-cache:
+
+networks:
+  default:
