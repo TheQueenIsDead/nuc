@@ -4,8 +4,8 @@ terraform {
     hostname     = "app.terraform.io"
 
     workspaces {
-      project = "nuc"
-      name    = "nuc"
+      project = "cloudflare"
+      name    = "cloudflare"
     }
   }
   required_providers {
