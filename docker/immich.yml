@@ -18,8 +18,8 @@ services:
       - '2283'
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.memos.rule=Host(`photos.tqid.dev`)"
-      - "traefik.http.routers.memos.entrypoints=web"
+      - "traefik.http.routers.photos.rule=Host(`photos.tqid.dev`)"
+      - "traefik.http.routers.photos.entrypoints=web"
     depends_on:
       - redis
       - database
