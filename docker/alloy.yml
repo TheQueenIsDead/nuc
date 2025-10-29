@@ -1,9 +1,5 @@
 name: alloy
 
-
-#  grafana/alloy:latest \
-#    run  --storage.path=/var/lib/alloy/data \
-#
 services:
   alloy:
     container_name: alloy
@@ -16,14 +12,6 @@ services:
     environment:
       GRAFANA_CLOUD_FM_COLLECTOR_ID: "1256811" # GCLOUD_FM_HOSTED_ID
       GRAFANA_CLOUD_RW_API_KEY: ${GRAFANA_CLOUD_RW_API_KEY}
-#      GCLOUD_HOSTED_METRICS_ID: "2437857"
-#      GCLOUD_HOSTED_METRICS_URL: "https://prometheus-prod-41-prod-au-southeast-1.grafana.net/api/prom/push"
-#      GCLOUD_HOSTED_LOGS_ID: "1214605"
-#      GCLOUD_HOSTED_LOGS_URL: "https://logs-prod-026.grafana.net/loki/api/v1/push"
-#      GCLOUD_FM_URL: "https://fleet-management-prod-017.grafana.net":
-#      GCLOUD_FM_POLL_FREQUENCY: "60s"
-#      GCLOUD_FM_HOSTED_ID: "1256811"
-#      ARCH: "amd64"
     volumes:
       - '../etc/config.alloy:/etc/alloy/config.alloy'
     expose:
