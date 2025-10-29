@@ -11,6 +11,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.rule=Host(`portainer.tqid.dev`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
       - "traefik.http.routers.portainer.entrypoints=web"
     expose:
       - "9443"
