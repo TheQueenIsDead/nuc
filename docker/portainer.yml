@@ -11,9 +11,10 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.rule=Host(`portainer.tqid.dev`)"
-      - "traefik.http.services.portainer.loadbalancer.server.port=9443"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
       - "traefik.http.routers.portainer.entrypoints=web"
     expose:
+      - "9000"
       - "9443"
 #      - "8000" # Remove if you do not intend to use Edge Agents
     networks:
