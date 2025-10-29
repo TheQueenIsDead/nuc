@@ -15,6 +15,9 @@ services:
     expose:
       - "9443"
 #      - "8000" # Remove if you do not intend to use Edge Agents
+    networks:
+      - default
+      - shared
 
 volumes:
   portainer_data:
@@ -22,3 +25,6 @@ volumes:
 
 networks:
   default:
+  shared:
+    name: docker_default
+    external: true
