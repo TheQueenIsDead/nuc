@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/alloy.yml
       - docker/alloy.yml
+      - etc/config.alloy
     branches:
       - main
 
