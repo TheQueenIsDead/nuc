@@ -15,4 +15,5 @@ jobs:
     env:
       GRAFANA_CLOUD_RW_API_KEY: ${{ secrets.GRAFANA_CLOUD_RW_API_KEY }}
     steps:
+      - uses: actions/checkout@v4
       - run: docker compose -f docker/alloy.yml up --wait
