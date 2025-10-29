@@ -69,3 +69,5 @@ volumes:
 
 networks:
   default:
+    name: docker_default
+    external: true
