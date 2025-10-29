@@ -9,7 +9,7 @@ remotecfg {
   poll_frequency = "60s"
 
   basic_auth {
-    username = "000000"
+    username = "1256811"
     password = sys.env("GRAFANA_CLOUD_RW_API_KEY")
   }
 }
