@@ -9,9 +9,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: "postgres"
       DB_DATABASE_NAME: "immich"
-#    extends:
-#      file: hwaccel.transcoding.yml
-#      service: cpu # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
+    devices:
+      - "/dev/dri:/dev/dri"
     volumes:
       - ${UPLOAD_FOLDER}:/data
       - /etc/localtime:/etc/localtime:ro
