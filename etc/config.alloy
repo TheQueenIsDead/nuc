@@ -1,0 +1,15 @@
+logging {
+  level  = "info"
+  format = "logfmt"
+}
+
+remotecfg {
+  url            = "https://fleet-management-prod-017.grafana.net"
+  id             = sys.env("GRAFANA_CLOUD_FM_COLLECTOR_ID")
+  poll_frequency = "60s"
+
+  basic_auth {
+    username = "000000"
+    password = sys.env("GRAFANA_CLOUD_RW_API_KEY")
+  }
+}
