@@ -1,0 +1,18 @@
+name: "Alloy"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/alloy.yml
+      - docker/alloy.yml
+    branches:
+      - main
+
+jobs:
+  alloy:
+    runs-on: self-hosted
+    env:
+      GRAFANA_CLOUD_RW_API_KEY: ${{ secrets.GRAFANA_CLOUD_RW_API_KEY }}
+    steps:
+      - run: docker compose -f docker/alloy.yml up --wait
