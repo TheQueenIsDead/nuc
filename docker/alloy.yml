@@ -1,0 +1,24 @@
+name: alloy
+
+services:
+  alloy:
+    container_name: alloy
+    image: grafana/alloy:latest
+    command:
+      - "run"
+      - "-server.http.listen-addr=0.0.0.0:12345"
+      - "-storage.path=/var/lib/alloy/data"
+      - "/etc/alloy/config.alloy"
+    environment:
+      GRAFANA_CLOUD_FM_COLLECTOR_ID: "1256811" # GCLOUD_FM_HOSTED_ID
+      GRAFANA_CLOUD_RW_API_KEY: ${GRAFANA_CLOUD_RW_API_KEY}
+    volumes:
+      - '../etc/config.alloy:/etc/alloy/config.alloy'
+    expose:
+      - '12345'
+    restart: always
+    networks:
+      - default
+
+networks:
+  default:
