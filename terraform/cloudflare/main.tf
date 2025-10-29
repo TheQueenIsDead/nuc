@@ -1,14 +1,19 @@
 data "cloudflare_zone" "this" {
-  name = var.zone_name
+  name = var.cloudflare_zone_name
 }
 
 data "cloudflare_zero_trust_access_identity_provider" "github" {
-  account_id = var.account_id
+  account_id = var.cloudflare_account_id
   name       = "GitHub"
 }
 
+data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
+  account_id = var.cloudflare_account_id
+  name       = "nuc"
+}
+
 resource "cloudflare_zero_trust_access_policy" "github" {
-  account_id = var.account_id
+  account_id = var.cloudflare_account_id
   name       = "Allow TheQueenIsDead"
   decision   = "allow"
 
@@ -18,7 +23,7 @@ resource "cloudflare_zero_trust_access_policy" "github" {
 }
 
 resource "cloudflare_zero_trust_access_policy" "public" {
-  account_id = var.account_id
+  account_id = var.cloudflare_account_id
   name       = "Bypass Public"
   decision   = "bypass"
 
@@ -26,7 +31,6 @@ resource "cloudflare_zero_trust_access_policy" "public" {
     everyone = true
   }
 }
-
 
 resource "cloudflare_zero_trust_access_application" "this" {
 
@@ -49,11 +53,6 @@ resource "cloudflare_zero_trust_access_application" "this" {
   ]
 }
 
-data "cloudflare_zero_trust_tunnel_cloudflared" "nuc" {
-  account_id = var.account_id
-  name       = "nuc"
-}
-
 resource "cloudflare_record" "http_app" {
   for_each = { for k, v in var.subdomains : v.name => v }
   zone_id = data.cloudflare_zone.this.id
@@ -68,7 +67,7 @@ resource "cloudflare_record" "http_app" {
 }
 
 resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
-  account_id = var.account_id
+  account_id = var.cloudflare_account_id
   #   tunnel_id  = data.cloudflare_zero_trust_tunnel_cloudflared.nuc.id
   tunnel_id = "f560b8a9-8e4d-4292-8c91-2a4636c3c21c"
   config {
@@ -84,7 +83,7 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "this" {
     dynamic "ingress_rule" {
       for_each = { for k, v in var.subdomains : v.name => v }
       content {
-        hostname = "${ingress_rule.value.name}.${var.zone_name}"
+        hostname = "${ingress_rule.value.name}.${var.cloudflare_zone_name}"
         service  = ingress_rule.value.name == "traefik" ? "http://traefik:8080" : "http://traefik:80"
       }
     }

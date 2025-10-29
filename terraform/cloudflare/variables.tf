@@ -1,14 +1,43 @@
+variable "cloudflare_account_id" {
+  type = string
+}
+
+variable "cloudflare_token" {
+  type = string
+  sensitive = true
+}
+
+variable "cloudflare_zone_name" {
+  type = string
+  default = "tqid.dev"
+}
+
+variable "cloudflare_access_allowed_emails" {
+  type = set(string)
+}
+
 variable "subdomains" {
   type = set(object({
     name   = string
     public = optional(bool, false)
   }))
-}
-
-variable "zone_name" {
-  type = string
-}
-
-variable "account_id" {
-  type = string
+  default = [
+    { name = "apps" },
+    { name = "budge" },
+    { name = "chat", public = true },
+    { name = "jellyfin", public = true },
+    { name = "jellyseer" },
+    { name = "memos" },
+    { name = "portainer" },
+    { name = "photos", public = true },
+    { name = "prowlarr" },
+    { name = "qbittorrent" },
+    { name = "radarr" },
+    { name = "recipes"},
+    { name = "requestrr"},
+    { name = "sonarr" },
+    { name = "speed", public = true },
+    { name = "tdarr" },
+    { name = "traefik" },
+  ]
 }
