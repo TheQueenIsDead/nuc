@@ -10,6 +10,9 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--entrypoints.web.transport.respondingTimeouts.readTimeout=120s"
+      - "--entrypoints.web.transport.respondingTimeouts.idleTimeout=120s"
+      - "--entrypoints.web.transport.respondingTimeouts.writeTimeout=120s"
       - "--metrics.prometheus"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
