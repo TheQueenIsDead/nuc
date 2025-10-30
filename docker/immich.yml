@@ -16,6 +16,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     expose:
       - '2283'
+    ports:
+      - "2283:2283" # Expose post to host for local network access
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.photos.rule=Host(`photos.tqid.dev`)"
