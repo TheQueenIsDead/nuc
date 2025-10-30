@@ -14,7 +14,8 @@ jobs:
   alloy:
     runs-on: self-hosted
     env:
-      GRAFANA_CLOUD_RW_API_KEY: ${{ secrets.GRAFANA_CLOUD_RW_API_KEY }}
+      GRAFANA_FLEET_TOKEN: ${{ secrets.GRAFANA_FLEET_TOKEN }}
+      GRAFANA_COLLECTOR_TOKEN: ${{ secrets.GRAFANA_COLLECTOR_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/alloy.yml up --wait

@@ -10,8 +10,9 @@ services:
       - "--storage.path=/var/lib/alloy/data"
       - "/etc/alloy/config.alloy"
     environment:
-      GCLOUD_FM_COLLECTOR_ID: "1256811" # GCLOUD_FM_HOSTED_ID
-      GCLOUD_RW_API_KEY: ${GRAFANA_CLOUD_RW_API_KEY}
+      GRAFANA_COLLECTOR_ID: "1256811"
+      GRAFANA_COLLECTOR_TOKEN: ${GRAFANA_COLLECTOR_TOKEN}
+      GRAFANA_FLEET_TOKEN: ${GRAFANA_COLLECTOR_TOKEN}
     volumes:
       - '../etc/config.alloy:/etc/alloy/config.alloy'
       - '/var/run/docker.sock:/var/run/docker.sock'
