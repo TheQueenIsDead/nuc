@@ -28,6 +28,7 @@ jobs:
       ACTUAL_PASSWORD: ${{ secrets.ACTUAL_PASSWORD }}
     steps:
       # https://github.com/scottmckendry/akahu-actual?tab=readme-ov-file#%EF%B8%8F-configuration
+      - run: docker ps
       - run: |
           docker run --rm \
             -e AKAHU_APP_TOKEN=${AKAHU_APP_TOKEN} \
