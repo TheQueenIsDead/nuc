@@ -21,7 +21,6 @@ jobs:
 
   akahu:
     runs-on: self-hosted
-    if: ${{ github.event_name == 'schedule' }}
     env:
       AKAHU_APP_TOKEN: ${{ secrets.AKAHU_APP_TOKEN }}
       AKAHU_USER_TOKEN: ${{ secrets.AKAHU_USER_TOKEN }}
