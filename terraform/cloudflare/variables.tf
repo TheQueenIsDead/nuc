@@ -23,6 +23,7 @@ variable "subdomains" {
   }))
   default = [
     { name = "apps" },
+    { name = "actual" },
     { name = "budge" },
     { name = "chat", public = true },
     { name = "jellyfin", public = true },

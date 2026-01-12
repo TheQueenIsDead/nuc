@@ -1,0 +1,17 @@
+name: "Actual"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/actual.yml
+      - docker/actual.yml
+    branches:
+      - main
+
+jobs:
+  actual:
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose -f docker/actual.yml up --wait
