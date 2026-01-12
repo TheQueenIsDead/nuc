@@ -1,7 +1,7 @@
 name: "actual"
 
 services:
-  actual_server:
+  actual:
     image: "docker.io/actualbudget/actual-server:latest"
     restart: "always"
     environment:
@@ -18,6 +18,8 @@ services:
       timeout: "10s"
       retries: "3"
       start_period: "20s"
+    networks:
+      - "shared"
     expose:
      - "5006"
     labels:
@@ -27,5 +29,9 @@ services:
 
 volumes:
   actual:
+
 networks:
   default:
+  shared:
+    name: docker_default
+    external: true
