@@ -38,4 +38,5 @@ jobs:
             -e ACTUAL_SYNC_ID=38f6d562-d5f6-4d37-9608-6493624bee2c \
             -e DAYS_TO_FETCH=7  \
             -e RECONCILE_ACCOUNT_IDS='["akahu_account_id_1","akahu_account_id_2"]' \
+            -e ACTUAL_E2E_ENCRYPTION_PASSWORD=password \
           ghcr.io/scottmckendry/akahu-actual
