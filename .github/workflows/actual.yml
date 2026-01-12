@@ -8,10 +8,34 @@ on:
       - docker/actual.yml
     branches:
       - main
-
+  schedule:
+    # This cron expression runs the workflow every 5 minutes
+    - cron: '*/5 * * * *'
 jobs:
   actual:
     runs-on: self-hosted
+    if: ${{ github.event_name != 'schedule' }}
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/actual.yml up --wait
+
+  akahu:
+    runs-on: self-hosted
+    if: ${{ github.event_name == 'schedule' }}
+    env:
+      AKAHU_APP_TOKEN: ${{ secrets.AKAHU_APP_TOKEN }}
+      AKAHU_USER_TOKEN: ${{ secrets.AKAHU_USER_TOKEN }}
+      ACTUAL_PASSWORD: ${{ secrets.ACTUAL_PASSWORD }}
+    steps:
+      # https://github.com/scottmckendry/akahu-actual?tab=readme-ov-file#%EF%B8%8F-configuration
+      - run: |
+          docker run --rm \
+            -e AKAHU_APP_TOKEN=${AKAHU_APP_TOKEN} \
+            -e AKAHU_USER_TOKEN=${AKAHU_USER_TOKEN} \
+            -e ACCOUNT_MAPPINGS='{"acc_cm0p60xmh000008mi9ugtd6y7":"520553d7-4269-4631-99c9-e369a9719fc3"}' \
+            -e ACTUAL_SERVER_URL=http://localhost:5006 \
+            -e ACTUAL_PASSWORD=${ACTUAL_PASSWORD} \
+            -e ACTUAL_SYNC_ID=38f6d562-d5f6-4d37-9608-6493624bee2c \
+            -e DAYS_TO_FETCH=7  \
+            -e RECONCILE_ACCOUNT_IDS='["akahu_account_id_1","akahu_account_id_2"]' \
+          ghcr.io/scottmckendry/akahu-actual
