@@ -37,6 +37,6 @@ jobs:
             -e ACTUAL_SERVER_URL=http://actual-actual-1:5006 \
             -e ACTUAL_PASSWORD=${ACTUAL_PASSWORD} \
             -e ACTUAL_SYNC_ID=38f6d562-d5f6-4d37-9608-6493624bee2c \
-            -e DAYS_TO_FETCH=1  \
+            -e DAYS_TO_FETCH=13  \
             -e RECONCILE_ACCOUNT_IDS='["acc_cm27xdmov000108m9a6v04u22","acc_cm27xdmo9000008m956qshr19"]' \
           ghcr.io/scottmckendry/akahu-actual # >/dev/null 2>&1
