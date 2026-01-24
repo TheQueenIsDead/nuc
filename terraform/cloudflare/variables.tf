@@ -27,7 +27,7 @@ variable "subdomains" {
     { name = "budge" },
     { name = "chat", public = true },
     { name = "jellyfin", public = true },
-    { name = "jellyseer" },
+    { name = "jellyseer", public = true },
     { name = "memos" },
     { name = "portainer" },
     { name = "photos", public = true },
