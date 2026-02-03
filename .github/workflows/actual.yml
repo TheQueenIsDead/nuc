@@ -2,6 +2,11 @@ name: "Actual"
 
 on:
   workflow_dispatch:
+    inputs:
+      days:
+        default: 1
+        type: number
+        description: "Number of days to sync"
   push:
     paths:
       - .github/workflows/actual.yml
@@ -14,7 +19,7 @@ on:
 jobs:
   actual:
     runs-on: self-hosted
-    if: ${{ github.event_name != 'schedule' }}
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/actual.yml up --wait
@@ -25,6 +30,7 @@ jobs:
       AKAHU_APP_TOKEN: ${{ secrets.AKAHU_APP_TOKEN }}
       AKAHU_USER_TOKEN: ${{ secrets.AKAHU_USER_TOKEN }}
       ACTUAL_PASSWORD: ${{ secrets.ACTUAL_PASSWORD }}
+      DAYS: ${{ inputs.days || 1 }}
     steps:
       # https://github.com/scottmckendry/akahu-actual?tab=readme-ov-file#%EF%B8%8F-configuration
       - run: docker ps
@@ -37,6 +43,6 @@ jobs:
             -e ACTUAL_SERVER_URL=http://actual-actual-1:5006 \
             -e ACTUAL_PASSWORD=${ACTUAL_PASSWORD} \
             -e ACTUAL_SYNC_ID=38f6d562-d5f6-4d37-9608-6493624bee2c \
-            -e DAYS_TO_FETCH=1  \
+            -e DAYS_TO_FETCH=$DAYS  \
             -e RECONCILE_ACCOUNT_IDS='["acc_cm27xdmov000108m9a6v04u22","acc_cm27xdmo9000008m956qshr19"]' \
           ghcr.io/scottmckendry/akahu-actual >/dev/null 2>&1
