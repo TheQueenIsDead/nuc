@@ -5,7 +5,7 @@ services:
     image: pihole/pihole:latest
     container_name: pihole
     hostname: pihole
-    restart: "always"
+    restart: "unless-stopped"
     # Requires 53 to be free, this mandates extra steps on Ubuntu by default
     # https://codepre.com/ubuntu-how-to-release-port-53-used-by-systemd-resolved.html
     # Also requires 53 to be bound to a specific address in order to preserve name resolution in other containers

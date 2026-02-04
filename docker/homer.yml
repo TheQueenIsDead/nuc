@@ -3,7 +3,7 @@ version: "3.8"
 services:
   homer:
     image: "b4bz/homer:latest"
-    restart: "always"
+    restart: "unless-stopped"
     volumes:
       - '../etc/homer.yml:/www/assets/config.yml'
     expose:

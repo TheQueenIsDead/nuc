@@ -3,7 +3,7 @@ name: "actual"
 services:
   actual:
     image: "docker.io/actualbudget/actual-server:latest"
-    restart: "always"
+    restart: "unless-stopped"
     environment:
       # See all options and more details at https://actualbudget.org/docs/config/
        - "ACTUAL_PORT=5006"
