@@ -15,9 +15,9 @@ jobs:
     # https://docs.immich.app/install/environment-variables
     env:
       # The location where your uploaded files are stored
-      UPLOAD_FOLDER: "/mnt/data/immich/library"
+      UPLOAD_FOLDER: "/mnt/unitek/immich/library"
       # The location where your database files are stored. Network shares are not supported for the database
-      DB_DATA_LOCATION: "/mnt/data/immich/postgres"
+      DB_DATA_LOCATION: "/home/tqid/immich/postgres"
       # Connection secret for postgres. You should change it to a random password
       # Please use only the characters `A-Za-z0-9`, without special characters or spaces
       DB_PASSWORD: ${{ secrets.IMMICH_DB_PASSWORD }}
