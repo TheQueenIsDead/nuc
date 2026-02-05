@@ -13,11 +13,11 @@ jobs:
   arr:
     runs-on: self-hosted
     env:
-      CONFIG_FOLDER: "/mnt/orico/config"
-      DOWNLOADS_FOLDER: "/mnt/orico/downloads"
-      MEDIA_FOLDER: "/mnt/orico/media"
-      MOVIES_FOLDER: "/mnt/orico/movies"
-      TV_FOLDER: "/mnt/orico/tv"
+      CONFIG_FOLDER: "/mnt/unitek/config"
+      DOWNLOADS_FOLDER: "/mnt/unitek/downloads"
+      MEDIA_FOLDER: "/mnt/unitek/media"
+      MOVIES_FOLDER: "/mnt/unitek/movies"
+      TV_FOLDER: "/mnt/unitek/tv"
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/arr.yml up --wait
