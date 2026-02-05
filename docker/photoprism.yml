@@ -91,6 +91,8 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.prism.rule=Host(`prism.tqid.dev`)"
       - "traefik.http.routers.prism.entrypoints=web"
+      - "traefik.http.services.prism.loadbalancer.server.port=2342"
+
     networks:
       - default
       - shared
