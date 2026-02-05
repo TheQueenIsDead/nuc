@@ -20,9 +20,9 @@ services:
       PHOTOPRISM_ADMIN_USER: "admin"
       PHOTOPRISM_ADMIN_PASSWORD: "${PRISM_ADMIN_PASSWORD}"
       PHOTOPRISM_AUTH_MODE: "password"
-      PHOTOPRISM_DISABLE_TLS: true
-      PHOTOPRISM_HTTP_PORT: 2342
-      PHOTOPRISM_DEFAULT_TLS: "true"
+      PHOTOPRISM_DISABLE_TLS: "true"
+      PHOTOPRISM_HTTP_PORT: "2342"
+      PHOTOPRISM_DEFAULT_TLS: "false"
       PHOTOPRISM_DEFAULT_LOCALE: "en"
       PHOTOPRISM_PLACES_LOCALE: "local"
       PHOTOPRISM_SITE_URL: "https://prism.tqid.dev/"  # server URL in the format "http(s)://domain.name(:port)/(path)"
