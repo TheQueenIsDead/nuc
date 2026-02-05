@@ -31,6 +31,7 @@ variable "subdomains" {
     { name = "memos" },
     { name = "portainer" },
     { name = "photos", public = true },
+    { name = "prism" },
     { name = "prowlarr" },
     { name = "qbittorrent" },
     { name = "radarr" },

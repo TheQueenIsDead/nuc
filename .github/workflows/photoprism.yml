@@ -10,7 +10,7 @@ on:
       - main
 
 jobs:
-  photoPrism:
+  prism:
     runs-on: self-hosted
     ## https://docs.photoprism.app/getting-started/config-options/
     env:
