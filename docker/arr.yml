@@ -104,24 +104,6 @@ services:
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.tqid.dev`)"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
 
-
-  requestrr:
-    image: "thomst08/requestrr"
-    container_name: "requestrr"
-    restart: "unless-stopped"
-    environment:
-#      - "PUID=1000"
-#      - "PGID=1000"
-      - "TZ=Pacific/Auckland"
-    volumes:
-      - "${CONFIG_FOLDER}/requestrr:/root/config"
-    expose:
-      - "4545"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.requestrr.entrypoints=web"
-      - "traefik.http.routers.requestrr.rule=Host(`requestrr.tqid.dev`)"
-
   tdarr:
     image: "ghcr.io/haveagitgat/tdarr:latest"
     container_name: "tdarr"
