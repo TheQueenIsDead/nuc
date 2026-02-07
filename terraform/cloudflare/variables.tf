@@ -36,7 +36,6 @@ variable "subdomains" {
     { name = "qbittorrent" },
     { name = "radarr" },
     { name = "recipes"},
-    { name = "requestrr"},
     { name = "sonarr" },
     { name = "speed", public = true },
     { name = "tdarr" },
