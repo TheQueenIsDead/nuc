@@ -19,6 +19,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.radarr.entrypoints=web"
       - "traefik.http.routers.radarr.rule=Host(`radarr.tqid.dev`)"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -41,6 +42,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sonarr.entrypoints=web"
       - "traefik.http.routers.sonarr.rule=Host(`sonarr.tqid.dev`)"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -61,6 +63,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.prowlarr.entrypoints=web"
       - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.tqid.dev`)"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -84,6 +87,7 @@ services:
       - "traefik.http.routers.qbittorrent.entrypoints=web"
       - "traefik.http.routers.qbittorrent.rule=Host(`qbittorrent.tqid.dev`)"
       - "traefik.http.services.qbittorrent.loadbalancer.server.port=8080"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -115,6 +119,7 @@ services:
       - "traefik.http.routers.jellyfin.entrypoints=web"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.tqid.dev`)"
       - "traefik.http.services.jellyfin.loadbalancer.server.port=8096"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -159,6 +164,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.tdarr.entrypoints=web"
       - "traefik.http.routers.tdarr.rule=Host(`tdarr.tqid.dev`)"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -185,6 +191,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.jellyseer.entrypoints=web"
       - "traefik.http.routers.jellyseer.rule=Host(`jellyseer.tqid.dev`)"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
@@ -205,6 +212,7 @@ services:
       - "traefik.http.routers.homarr.entrypoints=web"
       - "traefik.http.routers.homarr.rule=Host(`home.tqid.dev`)"
       - "traefik.http.services.homarr.loadbalancer.server.port=7575"
+      - "traefik.docker.network=docker_default"
     networks:
       - default
       - shared
