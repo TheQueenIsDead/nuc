@@ -14,4 +14,10 @@ services:
       - "3001:3001"
     volumes:
       - "/:/mnt/host:ro"
+    networks:
+      - arr
 
+networks:
+  arr:
+    external: true
+    name: arr_default
