@@ -175,7 +175,7 @@ services:
     expose:
      - "7575"
     environment:
-      - SECRET_ENCRYPTION_KEY=7a34da73bac19219101d177d64d401e83240248eeffef0fe5ce9c0610adcf6a7
+      - "SECRET_ENCRYPTION_KEY=${HOMARR_ENCRYPTION_KEY}"
     volumes:
       - "${CONFIG_FOLDER}/homarr:/appdata"
       - "/var/run/docker.sock:/var/run/docker.sock"

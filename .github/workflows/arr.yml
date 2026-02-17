@@ -18,6 +18,7 @@ jobs:
       MEDIA_FOLDER: "/mnt/unitek/media"
       MOVIES_FOLDER: "/mnt/unitek/movies"
       TV_FOLDER: "/mnt/unitek/tv"
+      HOMARR_ENCRYPTION_KEY: ${{ secrets.HOMARR_ENCRYPTION_KEY }}
     steps:
       - uses: actions/checkout@v4
       - run: docker compose -f docker/arr.yml up --wait
