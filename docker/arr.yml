@@ -80,12 +80,15 @@ services:
       - "${CONFIG_FOLDER}/sportarr:/config"
       - "${SPORT_FOLDER}:/sports"
       - "${DOWNLOADS_FOLDER}:/downloads"
+    ports:
+      - "1867:1867"
     expose:
       - "1867"
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.sportarr.entrypoints=web"
       - "traefik.http.routers.sportarr.rule=Host(`sportarr.tqid.dev`)"
+      - "traefik.http.services.sportarr.loadbalancer.server.port=1867"
       - "traefik.docker.network=docker_default"
     networks:
       - default
