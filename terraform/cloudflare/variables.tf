@@ -39,6 +39,7 @@ variable "subdomains" {
     { name = "recipes"},
     { name = "sonarr" },
     { name = "speed", public = true },
+    { name = "sportarr" },
     { name = "tdarr" },
     { name = "traefik" },
   ]
