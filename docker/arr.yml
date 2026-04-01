@@ -86,6 +86,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.sportarr.entrypoints=web"
       - "traefik.http.routers.sportarr.rule=Host(`sportarr.tqid.dev`)"
+      - "traefik.http.services.sportarr.loadbalancer.server.port=1867"
       - "traefik.docker.network=docker_default"
     networks:
       - default
