@@ -133,6 +133,7 @@ services:
       - "${CONFIG_FOLDER}/jellyfin:/config"
       - "${MOVIES_FOLDER}:/data/movies"
       - "${TV_FOLDER}:/data/tv"
+      - "${SPORT_FOLDER}:/data/sports"
     ports:
       - "8096:8096" # Local HTTP
 #      - 8920:8920 #optional
