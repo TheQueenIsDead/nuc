@@ -185,6 +185,7 @@ services:
       - "${CONFIG_FOLDER}/tdarr/cache:/temp" # TODO: Check this gets cleared out after the fact
       - "${MOVIES_FOLDER}:/media/movies"
       - "${TV_FOLDER}:/media/tv"
+      - "${SPORT_FOLDER}:/media/sports"
     devices:
       - /dev/dri:/dev/dri
     labels:
