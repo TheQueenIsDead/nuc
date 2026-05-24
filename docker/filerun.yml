@@ -15,7 +15,7 @@ services:
       - "${CONFIG_FOLDER}/filerun/db:/var/lib/mysql"
   web:
     image: "filerun/filerun"
-    user: "1001:1001"
+    user: "1000:1000"
     environment:
       FR_DB_HOST: "db"
       FR_DB_PORT: "3306"
