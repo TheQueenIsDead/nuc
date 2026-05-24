@@ -1,0 +1,25 @@
+name: "filebrowser"
+
+services:
+  filebrowser:
+    image: "filebrowser/filebrowser"
+    environment:
+      PUID: "1000"
+      PGID: "1000"
+    networks:
+      - shared
+    expose:
+      - "80"
+    volumes:
+      - "${FILES_FOLDER}/filebrowser:/srv"
+      - "${CONFIG_FOLDER}/filebrowser/database:/database"
+      - "${CONFIG_FOLDER}/filebrowser/config:/config"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.filebrowser.rule=Host(`filebrowser.tqid.dev`)"
+      - "traefik.http.routers.filebrowser.entrypoints=web"
+
+networks:
+  shared:
+    name: docker_default
+    external: true
