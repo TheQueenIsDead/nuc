@@ -36,8 +36,8 @@ services:
       - "${FILES_FOLDER}/filerun/user-files:/user-files"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.photos.rule=Host(`filerun.tqid.dev`)"
-      - "traefik.http.routers.photos.entrypoints=web"
+      - "traefik.http.routers.filerun.rule=Host(`filerun.tqid.dev`)"
+      - "traefik.http.routers.filerun.entrypoints=web"
 
 
 networks:
