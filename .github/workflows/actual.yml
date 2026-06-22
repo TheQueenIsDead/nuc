@@ -13,9 +13,9 @@ on:
       - docker/actual.yml
     branches:
       - main
-#  schedule:
-#    # This cron expression runs the workflow every hour at minute 30
-#    - cron: '30 * * * *'
+  schedule:
+    # This cron expression runs the workflow every hour at minute 30
+    - cron: '30 * * * *'
 jobs:
   actual:
     runs-on: self-hosted
