@@ -35,7 +35,7 @@ jobs:
       # https://github.com/scottmckendry/akahu-actual?tab=readme-ov-file#%EF%B8%8F-configuration
       - run: docker ps
       - run: |
-          docker run --rm \
+          docker run --rm --pull always \
             --network docker_default \
             -e AKAHU_APP_TOKEN=${AKAHU_APP_TOKEN} \
             -e AKAHU_USER_TOKEN=${AKAHU_USER_TOKEN} \
